@@ -1,79 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>K15 Boots Comparison</title>
+<title>K15 Boots - Compare & Choose</title>
 
 <style>
-
-/* =====================================================
-   THEME VARIABLES
-===================================================== */
-
-:root {
-  color-scheme: light dark;
-
-  --background: #191919;
-  --surface: #242424;
-  --surface-hover: #303030;
-
-  --text: #ffffff;
-  --text-secondary: #999999;
-
-  --border: #3a3a3a;
-
-  --input-background: #242424;
-
-  --button-background: #ffffff;
-  --button-text: #191919;
-
-  --shadow: rgba(0,0,0,0.35);
-}
-
-
-/* =====================================================
-   AUTOMATIC LIGHT MODE
-===================================================== */
-
-@media (prefers-color-scheme: light) {
-
-  :root {
-
-    --background: #f2f2f2;
-    --surface: #ffffff;
-    --surface-hover: #f3f3f3;
-
-    --text: #191919;
-    --text-secondary: #707070;
-
-    --border: #dddddd;
-
-    --input-background: #f7f7f7;
-
-    --button-background: #191919;
-    --button-text: #ffffff;
-
-    --shadow: rgba(0,0,0,0.12);
-
-  }
-
-}
-
-
-/* =====================================================
-   GLOBAL
-===================================================== */
 
 * {
   box-sizing: border-box;
 }
 
-body {
+/* ================================
+   DARK MODE DEFAULT
+================================ */
 
+:root {
+  --background: #191919;
+  --text: #f5f5f5;
+  --secondary-text: #a0a0a0;
+  --card: #222222;
+  --input: #242424;
+  --border: #383838;
+  --hover: #303030;
+  --soft: #292929;
+  --button: #f2f2f2;
+  --button-text: #191919;
+  --shadow: rgba(0,0,0,0.35);
+}
+
+
+/* ================================
+   AUTOMATIC LIGHT MODE
+================================ */
+
+@media (prefers-color-scheme: light) {
+
+  :root {
+    --background: #f5f5f5;
+    --text: #202020;
+    --secondary-text: #777777;
+    --card: #ffffff;
+    --input: #ffffff;
+    --border: #dddddd;
+    --hover: #eeeeee;
+    --soft: #eeeeee;
+    --button: #191919;
+    --button-text: #ffffff;
+    --shadow: rgba(0,0,0,0.12);
+  }
+
+}
+
+
+/* ================================
+   BODY
+================================ */
+
+html,
+body {
   margin: 0;
+  min-height: 100%;
+}
+
+body {
 
   padding: 40px 20px;
 
@@ -82,11 +72,9 @@ body {
     Helvetica,
     sans-serif;
 
-  background:
-    var(--background);
+  background: var(--background);
 
-  color:
-    var(--text);
+  color: var(--text);
 
   transition:
     background 0.3s ease,
@@ -95,9 +83,9 @@ body {
 }
 
 
-/* =====================================================
-   CONTAINER
-===================================================== */
+/* ================================
+   MAIN CONTAINER
+================================ */
 
 .comparison-container {
 
@@ -108,9 +96,9 @@ body {
 }
 
 
-/* =====================================================
+/* ================================
    SEARCH AREA
-===================================================== */
+================================ */
 
 .boot-selection {
 
@@ -142,15 +130,14 @@ body {
 
   font-weight: 600;
 
-  color:
-    var(--text);
+  color: var(--text);
 
 }
 
 
-/* =====================================================
+/* ================================
    SEARCH BOX
-===================================================== */
+================================ */
 
 .search-wrapper {
 
@@ -173,7 +160,7 @@ body {
     13px;
 
   background:
-    var(--input-background);
+    var(--input);
 
   color:
     var(--text);
@@ -181,8 +168,7 @@ body {
   font-size:
     15px;
 
-  outline:
-    none;
+  outline: none;
 
   transition:
     border 0.2s ease,
@@ -196,7 +182,7 @@ body {
 .boot-search::placeholder {
 
   color:
-    var(--text-secondary);
+    var(--secondary-text);
 
 }
 
@@ -204,34 +190,32 @@ body {
 .boot-search:focus {
 
   border-color:
-    #888;
+    var(--text);
 
   box-shadow:
-    0 0 0 3px rgba(128,128,128,0.15);
+    0 0 0 3px
+    rgba(127,127,127,0.15);
 
 }
 
 
-/* =====================================================
+/* ================================
    SUGGESTIONS
-===================================================== */
+================================ */
 
 .suggestions {
 
-  position:
-    absolute;
+  position: absolute;
 
   top:
     calc(100% + 7px);
 
-  left:
-    0;
+  left: 0;
 
-  right:
-    0;
+  right: 0;
 
   background:
-    var(--surface);
+    var(--card);
 
   border:
     1px solid var(--border);
@@ -242,48 +226,39 @@ body {
   box-shadow:
     0 12px 35px var(--shadow);
 
-  overflow:
-    hidden;
+  overflow: hidden;
 
-  z-index:
-    100;
+  z-index: 100;
 
-  display:
-    none;
+  display: none;
 
   max-height:
     350px;
 
-  overflow-y:
-    auto;
+  overflow-y: auto;
 
 }
 
 
 .suggestions.show {
 
-  display:
-    block;
+  display: block;
 
 }
 
 
 .suggestion {
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  gap:
-    14px;
+  gap: 14px;
 
   padding:
     12px 14px;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
   transition:
     background 0.15s ease;
@@ -294,81 +269,70 @@ body {
 .suggestion:hover {
 
   background:
-    var(--surface-hover);
+    var(--hover);
 
 }
 
 
 .suggestion img {
 
-  width:
-    65px;
+  width: 65px;
 
-  height:
-    50px;
+  height: 50px;
 
-  object-fit:
-    contain;
+  object-fit: contain;
 
-  border-radius:
-    8px;
+  border-radius: 8px;
 
   background:
-    #ffffff;
+    var(--soft);
 
 }
 
 
 .suggestion-placeholder {
 
-  width:
-    65px;
+  width: 65px;
 
-  height:
-    50px;
+  height: 50px;
 
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  border-radius:
-    8px;
+  border-radius: 8px;
 
   background:
-    #ffffff;
+    var(--soft);
 
-  font-size:
-    24px;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 10px;
+
+  color:
+    var(--secondary-text);
+
+  text-align: center;
 
 }
 
 
 .suggestion-info {
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
-  gap:
-    4px;
+  gap: 4px;
 
 }
 
 
 .suggestion-name {
 
-  font-size:
-    14px;
+  font-size: 14px;
 
-  font-weight:
-    600;
+  font-weight: 600;
 
   color:
     var(--text);
@@ -378,123 +342,100 @@ body {
 
 .suggestion-brand {
 
-  font-size:
-    12px;
+  font-size: 12px;
 
   color:
-    var(--text-secondary);
+    var(--secondary-text);
 
 }
 
 
-/* =====================================================
+/* ================================
    SELECTED BOOT
-===================================================== */
+================================ */
 
 .selected-boot {
 
-  display:
-    none;
+  display: none;
 
-  margin-top:
-    10px;
+  margin-top: 10px;
 
-  padding:
-    10px;
+  padding: 10px;
 
-  border-radius:
-    13px;
+  border-radius: 13px;
 
   background:
-    var(--surface);
+    var(--soft);
 
-  border:
-    1px solid var(--border);
+  align-items: center;
 
-  align-items:
-    center;
-
-  gap:
-    12px;
+  gap: 12px;
 
 }
 
 
 .selected-boot.show {
 
-  display:
-    flex;
+  display: flex;
 
 }
 
 
 .selected-boot img {
 
-  width:
-    70px;
+  width: 70px;
 
-  height:
-    55px;
+  height: 55px;
 
-  object-fit:
-    contain;
+  object-fit: contain;
 
   background:
-    #ffffff;
+    var(--card);
 
-  border-radius:
-    8px;
+  border-radius: 8px;
 
 }
 
 
 .selected-placeholder {
 
-  width:
-    70px;
+  width: 70px;
 
-  height:
-    55px;
+  height: 55px;
 
-  display:
-    flex;
+  display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
-  justify-content:
-    center;
+  justify-content: center;
 
   background:
-    #ffffff;
+    var(--card);
 
-  border-radius:
-    8px;
+  border-radius: 8px;
 
-  font-size:
-    25px;
+  font-size: 10px;
 
-  text-decoration:
-    none;
+  color:
+    var(--secondary-text);
+
+  text-align: center;
 
 }
 
 
 .selected-info {
 
-  flex:
-    1;
+  flex: 1;
 
 }
 
 
 .selected-name {
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  font-size:
-    14px;
+  font-size: 14px;
 
   color:
     var(--text);
@@ -505,36 +446,27 @@ body {
 .selected-brand {
 
   color:
-    var(--text-secondary);
+    var(--secondary-text);
 
-  font-size:
-    12px;
+  font-size: 12px;
 
-  margin-top:
-    4px;
+  margin-top: 4px;
 
 }
 
 
 .remove-boot {
 
-  border:
-    none;
+  border: none;
 
-  background:
-    transparent;
+  background: transparent;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  font-size:
-    18px;
+  font-size: 20px;
 
   color:
-    var(--text-secondary);
-
-  transition:
-    color 0.2s ease;
+    var(--secondary-text);
 
 }
 
@@ -547,20 +479,17 @@ body {
 }
 
 
-/* =====================================================
+/* ================================
    COMPARE BUTTON
-===================================================== */
+================================ */
 
 .compare-container {
 
-  width:
-    100%;
+  width: 100%;
 
-  display:
-    flex;
+  display: flex;
 
-  justify-content:
-    center;
+  justify-content: center;
 
   margin:
     20px 0 35px;
@@ -570,70 +499,63 @@ body {
 
 .compare-button {
 
-  position:
-    relative;
+  position: relative;
 
-  overflow:
-    hidden;
+  overflow: hidden;
 
   border:
     1px solid var(--border);
 
-  outline:
-    none;
+  outline: none;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
   color:
     var(--button-text);
 
   background:
-    var(--button-background);
+    var(--button);
 
   padding:
     15px 36px;
 
-  font-size:
-    16px;
+  font-size: 16px;
 
-  font-weight:
-    700;
+  font-weight: 600;
 
   border-radius:
     13px;
 
   box-shadow:
-    0 6px 20px var(--shadow),
-    0 0 18px rgba(128,128,128,0.15);
+
+    0 6px 20px
+    var(--shadow),
+
+    0 0 18px
+    rgba(127,127,127,0.12);
 
   transition:
+
     transform 0.25s ease,
+
     box-shadow 0.25s ease,
-    border-color 0.25s ease,
-    background 0.3s ease,
-    color 0.3s ease;
+
+    border-color 0.25s ease;
 
 }
 
 
-/* =====================================================
-   MOUSE FOLLOWING GLOW
-===================================================== */
+/* MOUSE GLOW */
 
 .compare-button::before {
 
-  content:
-    "";
+  content: "";
 
-  position:
-    absolute;
+  position: absolute;
 
-  width:
-    150px;
+  width: 150px;
 
-  height:
-    150px;
+  height: 150px;
 
   left:
     var(--mouse-x, 50%);
@@ -645,36 +567,34 @@ body {
     translate(-50%, -50%);
 
   background:
+
     radial-gradient(
+
       circle,
-      rgba(255,255,255,0.9),
-      rgba(255,255,255,0.35) 30%,
-      transparent 70%
+
+      rgba(127,127,127,0.45),
+
+      rgba(127,127,127,0.15)
+      30%,
+
+      transparent
+      70%
+
     );
 
-  opacity:
-    0;
+  opacity: 0;
 
-  pointer-events:
-    none;
-
-  transition:
-    opacity 0.15s ease;
+  pointer-events: none;
 
 }
 
 
 .compare-button:hover::before {
 
-  opacity:
-    1;
+  opacity: 1;
 
 }
 
-
-/* =====================================================
-   BUTTON HOVER
-===================================================== */
 
 .compare-button:hover {
 
@@ -682,29 +602,35 @@ body {
     translateY(-2px);
 
   border-color:
-    #888;
+    var(--text);
 
   box-shadow:
 
-    0 8px 25px var(--shadow),
+    0 8px 25px
+    var(--shadow),
 
-    0 0 8px rgba(255,255,255,0.45),
+    0 0 8px
+    rgba(127,127,127,0.35),
 
-    0 0 22px rgba(255,255,255,0.35),
+    0 0 22px
+    rgba(127,127,127,0.28),
 
-    0 0 45px rgba(255,255,255,0.18);
+    0 0 45px
+    rgba(127,127,127,0.16);
 
 }
 
 
-/* =====================================================
-   NEON CLICK EFFECT
-===================================================== */
+/* ================================
+   NEON EFFECT
+================================ */
 
 .compare-button.neon {
 
   animation:
-    neonPulse 0.7s ease-out;
+    neonPulse
+    0.7s
+    ease-out;
 
 }
 
@@ -714,7 +640,8 @@ body {
   0% {
 
     box-shadow:
-      0 0 5px rgba(128,128,128,0.2);
+      0 0 5px
+      rgba(127,127,127,0.2);
 
   }
 
@@ -722,48 +649,49 @@ body {
 
     box-shadow:
 
-      0 0 8px rgba(255,255,255,0.9),
+      0 0 8px
+      rgba(127,127,127,0.8),
 
-      0 0 20px rgba(255,255,255,0.8),
+      0 0 20px
+      rgba(127,127,127,0.65),
 
-      0 0 40px rgba(255,255,255,0.6),
-
-      0 0 70px rgba(255,255,255,0.35);
+      0 0 40px
+      rgba(127,127,127,0.45);
 
   }
 
   100% {
 
     box-shadow:
-      0 0 0 rgba(255,255,255,0);
+      0 0 0
+      rgba(127,127,127,0);
 
   }
 
 }
 
 
-/* =====================================================
+/* ================================
    RESULTS
-===================================================== */
+================================ */
 
 .comparison-result {
 
-  display:
-    none;
+  display: none;
 
-  margin-top:
-    20px;
+  margin-top: 20px;
 
   animation:
-    fadeIn 0.4s ease;
+    fadeIn
+    0.4s
+    ease;
 
 }
 
 
 .comparison-result.show {
 
-  display:
-    block;
+  display: block;
 
 }
 
@@ -772,8 +700,7 @@ body {
 
   from {
 
-    opacity:
-      0;
+    opacity: 0;
 
     transform:
       translateY(10px);
@@ -782,8 +709,7 @@ body {
 
   to {
 
-    opacity:
-      1;
+    opacity: 1;
 
     transform:
       translateY(0);
@@ -793,20 +719,18 @@ body {
 }
 
 
-/* =====================================================
+/* ================================
    BOOT CARDS
-===================================================== */
+================================ */
 
 .boots {
 
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap:
-    20px;
+  gap: 20px;
 
 }
 
@@ -814,7 +738,7 @@ body {
 .boot-card {
 
   background:
-    var(--surface);
+    var(--card);
 
   border:
     1px solid var(--border);
@@ -822,27 +746,26 @@ body {
   border-radius:
     18px;
 
-  padding:
-    25px;
+  padding: 25px;
 
   box-shadow:
-    0 5px 20px var(--shadow);
+    0 5px 20px
+    var(--shadow);
 
   transition:
+
     background 0.3s ease,
-    border 0.3s ease,
-    box-shadow 0.3s ease;
+
+    border 0.3s ease;
 
 }
 
 
 .boot-card h2 {
 
-  margin-top:
-    0;
+  margin-top: 0;
 
-  font-size:
-    22px;
+  font-size: 22px;
 
   color:
     var(--text);
@@ -852,29 +775,20 @@ body {
 
 .result-image {
 
-  width:
-    100%;
+  width: 100%;
 
-  height:
-    180px;
+  height: 180px;
 
-  object-fit:
-    contain;
+  object-fit: contain;
 
-  margin-bottom:
-    10px;
+  margin-bottom: 10px;
 
 }
 
 
-/* =====================================================
-   STATS
-===================================================== */
-
 .stat {
 
-  display:
-    flex;
+  display: flex;
 
   justify-content:
     space-between;
@@ -885,16 +799,14 @@ body {
   border-bottom:
     1px solid var(--border);
 
-  font-size:
-    15px;
+  font-size: 15px;
 
 }
 
 
 .stat:last-child {
 
-  border-bottom:
-    none;
+  border-bottom: none;
 
 }
 
@@ -902,115 +814,82 @@ body {
 .stat-name {
 
   color:
-    var(--text-secondary);
+    var(--secondary-text);
 
 }
 
 
 .stat-value {
 
-  font-weight:
-    600;
+  font-weight: 600;
 
   color:
     var(--text);
 
-  text-align:
-    right;
+  text-align: right;
 
-  max-width:
-    60%;
+  max-width: 60%;
 
 }
 
-
-/* =====================================================
-   WINNER
-===================================================== */
 
 .winner {
 
-  margin-top:
-    20px;
+  margin-top: 20px;
 
-  padding:
-    15px;
+  padding: 15px;
 
   background:
-    var(--surface);
+    var(--soft);
 
-  border:
-    1px solid var(--border);
+  border-radius: 12px;
 
-  border-radius:
-    12px;
+  text-align: center;
 
-  text-align:
-    center;
-
-  font-weight:
-    600;
+  font-weight: 600;
 
   color:
     var(--text);
 
-  box-shadow:
-    0 5px 20px var(--shadow);
-
 }
 
 
-/* =====================================================
-   PRODUCT LINK
-===================================================== */
+/* NIKE LINK */
 
-.product-link {
+.nike-product-link {
 
-  display:
-    block;
+  display: block;
 
-  text-align:
-    center;
+  text-align: center;
 
-  padding:
-    12px;
+  padding: 12px;
 
-  margin-bottom:
-    15px;
+  margin-bottom: 15px;
 
   background:
-    var(--button-background);
+    var(--soft);
 
-  border-radius:
-    10px;
+  border-radius: 10px;
 
   color:
-    var(--button-text);
+    var(--text);
 
-  text-decoration:
-    none;
-
-  font-weight:
-    600;
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  text-decoration: none;
 
 }
 
 
-.product-link:hover {
+.nike-product-link:hover {
 
-  transform:
-    translateY(-1px);
+  background:
+    var(--hover);
 
 }
 
 
-/* =====================================================
+/* ================================
    MOBILE
-===================================================== */
+================================ */
 
 @media (max-width: 700px) {
 
@@ -1025,38 +904,7 @@ body {
   body {
 
     padding:
-      25px 15px;
-
-  }
-
-  .boot-card {
-
-    padding:
-      20px;
-
-  }
-
-}
-
-
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-
-    animation-duration:
-      0.01ms !important;
-
-    animation-iteration-count:
-      1 !important;
-
-    transition-duration:
-      0.01ms !important;
+      25px 14px;
 
   }
 
@@ -1073,12 +921,12 @@ body {
 <div class="comparison-container">
 
 
-  <!-- =================================================
-       SEARCH
-  ================================================== -->
+  <!-- SEARCH AREA -->
 
   <div class="boot-selection">
 
+
+    <!-- BOOT 1 -->
 
     <div class="boot-selector">
 
@@ -1108,6 +956,8 @@ body {
 
     </div>
 
+
+    <!-- BOOT 2 -->
 
     <div class="boot-selector">
 
@@ -1140,9 +990,7 @@ body {
   </div>
 
 
-  <!-- =================================================
-       COMPARE BUTTON
-  ================================================== -->
+  <!-- COMPARE BUTTON -->
 
   <div class="compare-container">
 
@@ -1157,9 +1005,7 @@ body {
   </div>
 
 
-  <!-- =================================================
-       RESULTS
-  ================================================== -->
+  <!-- RESULTS -->
 
   <div
     class="comparison-result"
@@ -1169,7 +1015,7 @@ body {
     <div class="boots">
 
 
-      <!-- BOOT 1 -->
+      <!-- BOOT 1 RESULT -->
 
       <div class="boot-card">
 
@@ -1186,127 +1032,44 @@ body {
 
 
         <div class="stat">
-
-          <span class="stat-name">
-            Speed
-          </span>
-
-          <span
-            class="stat-value"
-            id="speed1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Speed</span>
+          <span class="stat-value" id="speed1">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Control
-          </span>
-
-          <span
-            class="stat-value"
-            id="control1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Control</span>
+          <span class="stat-value" id="control1">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Comfort
-          </span>
-
-          <span
-            class="stat-value"
-            id="comfort1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Comfort</span>
+          <span class="stat-value" id="comfort1">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Weight
-          </span>
-
-          <span
-            class="stat-value"
-            id="weight1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Weight</span>
+          <span class="stat-value" id="weight1">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Price
-          </span>
-
-          <span
-            class="stat-value"
-            id="price1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Price</span>
+          <span class="stat-value" id="price1">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Surface
-          </span>
-
-          <span
-            class="stat-value"
-            id="surface1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Surface</span>
+          <span class="stat-value" id="surface1">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Technology
-          </span>
-
-          <span
-            class="stat-value"
-            id="technology1">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Technology</span>
+          <span class="stat-value" id="technology1">—</span>
         </div>
 
       </div>
 
 
-      <!-- BOOT 2 -->
+      <!-- BOOT 2 RESULT -->
 
       <div class="boot-card">
 
@@ -1323,121 +1086,38 @@ body {
 
 
         <div class="stat">
-
-          <span class="stat-name">
-            Speed
-          </span>
-
-          <span
-            class="stat-value"
-            id="speed2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Speed</span>
+          <span class="stat-value" id="speed2">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Control
-          </span>
-
-          <span
-            class="stat-value"
-            id="control2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Control</span>
+          <span class="stat-value" id="control2">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Comfort
-          </span>
-
-          <span
-            class="stat-value"
-            id="comfort2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Comfort</span>
+          <span class="stat-value" id="comfort2">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Weight
-          </span>
-
-          <span
-            class="stat-value"
-            id="weight2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Weight</span>
+          <span class="stat-value" id="weight2">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Price
-          </span>
-
-          <span
-            class="stat-value"
-            id="price2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Price</span>
+          <span class="stat-value" id="price2">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Surface
-          </span>
-
-          <span
-            class="stat-value"
-            id="surface2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Surface</span>
+          <span class="stat-value" id="surface2">—</span>
         </div>
 
-
         <div class="stat">
-
-          <span class="stat-name">
-            Technology
-          </span>
-
-          <span
-            class="stat-value"
-            id="technology2">
-
-            —
-
-          </span>
-
+          <span class="stat-name">Technology</span>
+          <span class="stat-value" id="technology2">—</span>
         </div>
 
       </div>
@@ -1459,7 +1139,6 @@ body {
 
 
 <script>
-
 
 /* =====================================================
    FOOTBALL BOOT DATABASE
@@ -1538,6 +1217,228 @@ const boots = [
     technology:
       "3/4-length Air Zoom + Vaporposite+"
 
+  },
+
+
+  {
+    name:
+      "Nike Phantom Elite",
+
+    brand:
+      "Nike Phantom",
+
+    image:
+      "",
+
+    productPage:
+      "https://www.nike.com/gb/",
+
+    speed:
+      "8.5/10",
+
+    control:
+      "10/10",
+
+    comfort:
+      "9/10",
+
+    weight:
+      "Approx. 200g",
+
+    price:
+      "Elite price varies",
+
+    surface:
+      "Firm Ground (FG)",
+
+    technology:
+      "Gripknit + Cyclone 360"
+
+  },
+
+
+  {
+    name:
+      "Nike Phantom Academy",
+
+    brand:
+      "Nike Phantom",
+
+    image:
+      "",
+
+    productPage:
+      "https://www.nike.com/gb/",
+
+    speed:
+      "8/10",
+
+    control:
+      "8.5/10",
+
+    comfort:
+      "8.5/10",
+
+    weight:
+      "Varies",
+
+    price:
+      "Academy price varies",
+
+    surface:
+      "Firm Ground (FG)",
+
+    technology:
+      "NikeSkin + textured touch area"
+
+  },
+
+
+  {
+    name:
+      "Nike Tiempo Elite",
+
+    brand:
+      "Nike Tiempo",
+
+    image:
+      "",
+
+    productPage:
+      "https://www.nike.com/gb/",
+
+    speed:
+      "8/10",
+
+    control:
+      "9.5/10",
+
+    comfort:
+      "10/10",
+
+    weight:
+      "Approx. 200g",
+
+    price:
+      "Elite price varies",
+
+    surface:
+      "Firm Ground (FG)",
+
+    technology:
+      "FlyTouch Plus + flexible plate"
+
+  },
+
+
+  {
+    name:
+      "Nike Tiempo Academy",
+
+    brand:
+      "Nike Tiempo",
+
+    image:
+      "",
+
+    productPage:
+      "https://www.nike.com/gb/",
+
+    speed:
+      "7.5/10",
+
+    control:
+      "8.5/10",
+
+    comfort:
+      "9/10",
+
+    weight:
+      "Varies",
+
+    price:
+      "Academy price varies",
+
+    surface:
+      "Firm Ground (FG)",
+
+    technology:
+      "Synthetic upper + padded touch"
+
+  },
+
+
+  {
+    name:
+      "adidas X Elite FG",
+
+    brand:
+      "adidas X",
+
+    image:
+      "",
+
+    productPage:
+      "https://www.adidas.co.uk/",
+
+    speed:
+      "9.5/10",
+
+    control:
+      "8.5/10",
+
+    comfort:
+      "8/10",
+
+    weight:
+      "Lightweight",
+
+    price:
+      "Elite price varies",
+
+    surface:
+      "Firm Ground (FG)",
+
+    technology:
+      "Speedskin + lightweight Speedframe"
+
+  },
+
+
+  {
+    name:
+      "PUMA FUTURE 9 Ultimate FG",
+
+    brand:
+      "PUMA FUTURE",
+
+    image:
+      "",
+
+    productPage:
+      "https://uk.puma.com/",
+
+    speed:
+      "8.5/10",
+
+    control:
+      "9.5/10",
+
+    comfort:
+      "9.5/10",
+
+    weight:
+      "Lightweight",
+
+    price:
+      "£220",
+
+    surface:
+      "Firm Ground (FG)",
+
+    technology:
+      "FUZIONPODS + 3D grip zones + FLEXGILITY"
+
   }
 
 ];
@@ -1547,11 +1448,9 @@ const boots = [
    SELECTED BOOTS
 ===================================================== */
 
-let selectedBoot1 =
-  null;
+let selectedBoot1 = null;
 
-let selectedBoot2 =
-  null;
+let selectedBoot2 = null;
 
 
 /* =====================================================
@@ -1570,8 +1469,7 @@ function showSuggestions(
       .trim();
 
 
-  suggestionsBox.innerHTML =
-    "";
+  suggestionsBox.innerHTML = "";
 
 
   const matches =
@@ -1587,20 +1485,17 @@ function showSuggestions(
         boot.brand
           .toLowerCase()
           .includes(search)
-
     );
 
 
-  if (
-    matches.length === 0
-  ) {
+  if (matches.length === 0) {
 
     suggestionsBox.innerHTML = `
 
       <div style="
         padding:18px;
         text-align:center;
-        color:#888;
+        color:var(--secondary-text);
         font-size:14px;
       ">
 
@@ -1610,9 +1505,7 @@ function showSuggestions(
 
     `;
 
-    suggestionsBox
-      .classList
-      .add("show");
+    suggestionsBox.classList.add("show");
 
     return;
 
@@ -1623,38 +1516,27 @@ function showSuggestions(
     boot => {
 
       const item =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       item.className =
         "suggestion";
 
 
-      const imageHTML =
-        boot.image
+      const imageHTML = boot.image
 
         ?
 
-        `
-        <img
+        `<img
           src="${boot.image}"
           alt="${boot.name}"
-        >
-        `
+        >`
 
         :
 
-        `
-        <div
-          class="suggestion-placeholder">
-
-          👟
-
-        </div>
-
-        `;
+        `<div class="suggestion-placeholder">
+          Image<br>coming soon
+        </div>`;
 
 
       item.innerHTML = `
@@ -1664,15 +1546,11 @@ function showSuggestions(
         <div class="suggestion-info">
 
           <div class="suggestion-name">
-
             ${boot.name}
-
           </div>
 
           <div class="suggestion-brand">
-
             ${boot.brand}
-
           </div>
 
         </div>
@@ -1693,17 +1571,13 @@ function showSuggestions(
       );
 
 
-      suggestionsBox.appendChild(
-        item
-      );
+      suggestionsBox.appendChild(item);
 
     }
   );
 
 
-  suggestionsBox
-    .classList
-    .add("show");
+  suggestionsBox.classList.add("show");
 
 }
 
@@ -1717,30 +1591,18 @@ function selectBoot(
   selectionNumber
 ) {
 
+  if (selectionNumber === 1) {
 
-  if (
-    selectionNumber === 1
-  ) {
-
-    selectedBoot1 =
-      boot;
-
+    selectedBoot1 = boot;
 
     document
-      .getElementById(
-        "search1"
-      )
-      .value =
-      "";
-
+      .getElementById("search1")
+      .value = "";
 
     document
-      .getElementById(
-        "suggestions1"
-      )
+      .getElementById("suggestions1")
       .classList
       .remove("show");
-
 
     showSelectedBoot(
       boot,
@@ -1750,29 +1612,18 @@ function selectBoot(
   }
 
 
-  if (
-    selectionNumber === 2
-  ) {
+  if (selectionNumber === 2) {
 
-    selectedBoot2 =
-      boot;
-
+    selectedBoot2 = boot;
 
     document
-      .getElementById(
-        "search2"
-      )
-      .value =
-      "";
-
+      .getElementById("search2")
+      .value = "";
 
     document
-      .getElementById(
-        "suggestions2"
-      )
+      .getElementById("suggestions2")
       .classList
       .remove("show");
-
 
     showSelectedBoot(
       boot,
@@ -1799,43 +1650,20 @@ function showSelectedBoot(
     );
 
 
-  let imageHTML =
-    "";
+  const imageHTML = boot.image
 
+    ?
 
-  if (
-    boot.image
-  ) {
+    `<img
+      src="${boot.image}"
+      alt="${boot.name}"
+    >`
 
-    imageHTML = `
+    :
 
-      <img
-        src="${boot.image}"
-        alt="${boot.name}"
-      >
-
-    `;
-
-  }
-
-  else {
-
-    imageHTML = `
-
-      <a
-        href="${boot.productPage || '#'}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="selected-placeholder"
-        title="View boot product page">
-
-        👟
-
-      </a>
-
-    `;
-
-  }
+    `<div class="selected-placeholder">
+      Image<br>coming soon
+    </div>`;
 
 
   element.innerHTML = `
@@ -1845,15 +1673,11 @@ function showSelectedBoot(
     <div class="selected-info">
 
       <div class="selected-name">
-
         ${boot.name}
-
       </div>
 
       <div class="selected-brand">
-
         ${boot.brand}
-
       </div>
 
     </div>
@@ -1861,7 +1685,8 @@ function showSelectedBoot(
     <button
       class="remove-boot"
       onclick="removeBoot('${elementId}')"
-      aria-label="Remove boot">
+      aria-label="Remove boot"
+    >
 
       ×
 
@@ -1870,9 +1695,7 @@ function showSelectedBoot(
   `;
 
 
-  element
-    .classList
-    .add("show");
+  element.classList.add("show");
 
 }
 
@@ -1891,33 +1714,25 @@ function removeBoot(
     );
 
 
-  element.innerHTML =
-    "";
+  element.innerHTML = "";
 
-
-  element
-    .classList
-    .remove("show");
+  element.classList.remove("show");
 
 
   if (
-    elementId ===
-    "selected1"
+    elementId === "selected1"
   ) {
 
-    selectedBoot1 =
-      null;
+    selectedBoot1 = null;
 
   }
 
 
   if (
-    elementId ===
-    "selected2"
+    elementId === "selected2"
   ) {
 
-    selectedBoot2 =
-      null;
+    selectedBoot2 = null;
 
   }
 
@@ -1929,15 +1744,12 @@ function removeBoot(
 ===================================================== */
 
 document
-  .getElementById(
-    "search1"
-  )
+  .getElementById("search1")
   .addEventListener(
     "input",
     function() {
 
       showSuggestions(
-
         this,
 
         document.getElementById(
@@ -1945,7 +1757,6 @@ document
         ),
 
         1
-
       );
 
     }
@@ -1953,15 +1764,12 @@ document
 
 
 document
-  .getElementById(
-    "search2"
-  )
+  .getElementById("search2")
   .addEventListener(
     "input",
     function() {
 
       showSuggestions(
-
         this,
 
         document.getElementById(
@@ -1969,7 +1777,6 @@ document
         ),
 
         2
-
       );
 
     }
@@ -1981,15 +1788,12 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "search1"
-  )
+  .getElementById("search1")
   .addEventListener(
     "focus",
     function() {
 
       showSuggestions(
-
         this,
 
         document.getElementById(
@@ -1997,7 +1801,6 @@ document
         ),
 
         1
-
       );
 
     }
@@ -2005,15 +1808,12 @@ document
 
 
 document
-  .getElementById(
-    "search2"
-  )
+  .getElementById("search2")
   .addEventListener(
     "focus",
     function() {
 
       showSuggestions(
-
         this,
 
         document.getElementById(
@@ -2021,7 +1821,6 @@ document
         ),
 
         2
-
       );
 
     }
@@ -2029,7 +1828,7 @@ document
 
 
 /* =====================================================
-   MOUSE FOLLOWING GLOW
+   MOUSE GLOW
 ===================================================== */
 
 const compareButton =
@@ -2079,7 +1878,6 @@ compareButton.addEventListener(
 compareButton.addEventListener(
   "click",
   function() {
-
 
     compareButton
       .classList
@@ -2152,11 +1950,9 @@ function updateResult(
   number
 ) {
 
-
   document
     .getElementById(
-      "resultBoot" +
-      number
+      "resultBoot" + number
     )
     .textContent =
     boot.name;
@@ -2164,8 +1960,7 @@ function updateResult(
 
   document
     .getElementById(
-      "speed" +
-      number
+      "speed" + number
     )
     .textContent =
     boot.speed;
@@ -2173,8 +1968,7 @@ function updateResult(
 
   document
     .getElementById(
-      "control" +
-      number
+      "control" + number
     )
     .textContent =
     boot.control;
@@ -2182,8 +1976,7 @@ function updateResult(
 
   document
     .getElementById(
-      "comfort" +
-      number
+      "comfort" + number
     )
     .textContent =
     boot.comfort;
@@ -2191,8 +1984,7 @@ function updateResult(
 
   document
     .getElementById(
-      "weight" +
-      number
+      "weight" + number
     )
     .textContent =
     boot.weight;
@@ -2200,8 +1992,7 @@ function updateResult(
 
   document
     .getElementById(
-      "price" +
-      number
+      "price" + number
     )
     .textContent =
     boot.price;
@@ -2209,8 +2000,7 @@ function updateResult(
 
   document
     .getElementById(
-      "surface" +
-      number
+      "surface" + number
     )
     .textContent =
     boot.surface;
@@ -2218,8 +2008,7 @@ function updateResult(
 
   document
     .getElementById(
-      "technology" +
-      number
+      "technology" + number
     )
     .textContent =
     boot.technology;
@@ -2227,8 +2016,7 @@ function updateResult(
 
   const image =
     document.getElementById(
-      "resultImage" +
-      number
+      "resultImage" + number
     );
 
 
@@ -2238,30 +2026,24 @@ function updateResult(
 
   const oldLink =
     card.querySelector(
-      ".product-link"
+      ".nike-product-link"
     );
 
 
-  if (
-    oldLink
-  ) {
+  if (oldLink) {
 
     oldLink.remove();
 
   }
 
 
-  if (
-    boot.image
-  ) {
+  if (boot.image) {
 
     image.src =
       boot.image;
 
-
     image.alt =
       boot.name;
-
 
     image.style.display =
       "block";
@@ -2270,42 +2052,40 @@ function updateResult(
 
   else {
 
+    image.removeAttribute("src");
+
     image.style.display =
       "none";
 
 
-    if (
-      boot.productPage
-    ) {
+    if (boot.productPage) {
 
-      const link =
-        document.createElement(
-          "a"
-        );
+      const nikeLink =
+        document.createElement("a");
 
 
-      link.className =
-        "product-link";
+      nikeLink.className =
+        "nike-product-link";
 
 
-      link.href =
+      nikeLink.href =
         boot.productPage;
 
 
-      link.target =
+      nikeLink.target =
         "_blank";
 
 
-      link.rel =
+      nikeLink.rel =
         "noopener noreferrer";
 
 
-      link.textContent =
-        "View this boot on Nike →";
+      nikeLink.textContent =
+        "View this boot →";
 
 
       card.insertBefore(
-        link,
+        nikeLink,
         image.nextSibling
       );
 
@@ -2350,6 +2130,10 @@ document.addEventListener(
   }
 );
 
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
