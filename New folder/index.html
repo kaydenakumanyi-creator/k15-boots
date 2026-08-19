@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K15 Boots - Compare & Choose</title>
 
 <style>
 
@@ -11,220 +13,94 @@
   box-sizing: border-box;
 }
 
-/* ================================
-   DARK MODE DEFAULT
-================================ */
-
-:root {
-  --background: #191919;
-  --text: #f5f5f5;
-  --secondary-text: #a0a0a0;
-  --card: #222222;
-  --input: #242424;
-  --border: #383838;
-  --hover: #303030;
-  --soft: #292929;
-  --button: #f2f2f2;
-  --button-text: #191919;
-  --shadow: rgba(0,0,0,0.35);
-}
-
-
-/* ================================
-   AUTOMATIC LIGHT MODE
-================================ */
-
-@media (prefers-color-scheme: light) {
-
-  :root {
-    --background: #f5f5f5;
-    --text: #202020;
-    --secondary-text: #777777;
-    --card: #ffffff;
-    --input: #ffffff;
-    --border: #dddddd;
-    --hover: #eeeeee;
-    --soft: #eeeeee;
-    --button: #191919;
-    --button-text: #ffffff;
-    --shadow: rgba(0,0,0,0.12);
-  }
-
-}
-
-
-/* ================================
-   BODY
-================================ */
-
-html,
 body {
   margin: 0;
-  min-height: 100%;
-}
-
-body {
-
   padding: 40px 20px;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  background: var(--background);
-
-  color: var(--text);
-
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
-
+  font-family: Arial, Helvetica, sans-serif;
+  background: transparent;
+  color: #222;
 }
-
-
-/* ================================
-   MAIN CONTAINER
-================================ */
 
 .comparison-container {
-
-  max-width: 1000px;
-
+  max-width: 1100px;
   margin: auto;
-
 }
 
 
-/* ================================
-   SEARCH AREA
-================================ */
+/* =====================================================
+   BOOT SELECTION
+===================================================== */
 
 .boot-selection {
-
   display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 20px;
-
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 20px;
   margin-bottom: 25px;
-
 }
-
 
 .boot-selector {
-
   position: relative;
-
 }
-
 
 .boot-selector h3 {
-
-  margin:
-    0 0 10px;
-
+  margin: 0 0 10px;
   font-size: 16px;
-
   font-weight: 600;
-
-  color: var(--text);
-
+  color: #333;
 }
-
-
-/* ================================
-   SEARCH BOX
-================================ */
 
 .search-wrapper {
-
   position: relative;
-
 }
 
-
 .boot-search {
-
   width: 100%;
+  padding: 15px 17px;
 
-  padding:
-    15px 17px;
+  border: 1px solid #ddd;
+  border-radius: 13px;
 
-  border:
-    1px solid var(--border);
+  background: #f7f7f7;
 
-  border-radius:
-    13px;
-
-  background:
-    var(--input);
-
-  color:
-    var(--text);
-
-  font-size:
-    15px;
+  font-size: 15px;
 
   outline: none;
 
   transition:
     border 0.2s ease,
     box-shadow 0.2s ease,
-    background 0.3s ease,
-    color 0.3s ease;
-
+    background 0.2s ease;
 }
-
-
-.boot-search::placeholder {
-
-  color:
-    var(--secondary-text);
-
-}
-
 
 .boot-search:focus {
-
-  border-color:
-    var(--text);
+  background: white;
+  border-color: #999;
 
   box-shadow:
-    0 0 0 3px
-    rgba(127,127,127,0.15);
-
+    0 0 0 3px rgba(0,0,0,0.05);
 }
 
 
-/* ================================
+/* =====================================================
    SUGGESTIONS
-================================ */
+===================================================== */
 
 .suggestions {
-
   position: absolute;
 
-  top:
-    calc(100% + 7px);
+  top: calc(100% + 7px);
 
   left: 0;
-
   right: 0;
 
-  background:
-    var(--card);
+  background: white;
 
-  border:
-    1px solid var(--border);
+  border-radius: 14px;
 
-  border-radius:
-    14px;
+  border: 1px solid #e5e5e5;
 
   box-shadow:
-    0 12px 35px var(--shadow);
+    0 12px 35px rgba(0,0,0,0.14);
 
   overflow: hidden;
 
@@ -232,130 +108,69 @@ body {
 
   display: none;
 
-  max-height:
-    350px;
+  max-height: 350px;
 
   overflow-y: auto;
-
 }
-
 
 .suggestions.show {
-
   display: block;
-
 }
 
-
 .suggestion {
-
   display: flex;
 
   align-items: center;
 
   gap: 14px;
 
-  padding:
-    12px 14px;
+  padding: 12px 14px;
 
   cursor: pointer;
 
   transition:
     background 0.15s ease;
-
 }
-
 
 .suggestion:hover {
-
-  background:
-    var(--hover);
-
+  background: #f3f3f3;
 }
 
-
 .suggestion img {
-
   width: 65px;
-
   height: 50px;
 
   object-fit: contain;
 
   border-radius: 8px;
 
-  background:
-    var(--soft);
-
+  background: #f7f7f7;
 }
-
-
-.suggestion-placeholder {
-
-  width: 65px;
-
-  height: 50px;
-
-  border-radius: 8px;
-
-  background:
-    var(--soft);
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 10px;
-
-  color:
-    var(--secondary-text);
-
-  text-align: center;
-
-}
-
 
 .suggestion-info {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 4px;
-
 }
-
 
 .suggestion-name {
-
   font-size: 14px;
-
   font-weight: 600;
-
-  color:
-    var(--text);
-
 }
-
 
 .suggestion-brand {
-
   font-size: 12px;
-
-  color:
-    var(--secondary-text);
-
+  color: #888;
 }
 
 
-/* ================================
+/* =====================================================
    SELECTED BOOT
-================================ */
+===================================================== */
 
 .selected-boot {
-
   display: none;
 
   margin-top: 10px;
@@ -364,157 +179,95 @@ body {
 
   border-radius: 13px;
 
-  background:
-    var(--soft);
+  background: #f5f5f5;
 
   align-items: center;
 
   gap: 12px;
-
 }
-
 
 .selected-boot.show {
-
   display: flex;
-
 }
 
-
 .selected-boot img {
-
   width: 70px;
-
   height: 55px;
 
   object-fit: contain;
 
-  background:
-    var(--card);
+  background: white;
 
   border-radius: 8px;
-
 }
-
-
-.selected-placeholder {
-
-  width: 70px;
-
-  height: 55px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  background:
-    var(--card);
-
-  border-radius: 8px;
-
-  font-size: 10px;
-
-  color:
-    var(--secondary-text);
-
-  text-align: center;
-
-}
-
 
 .selected-info {
-
   flex: 1;
-
 }
-
 
 .selected-name {
-
   font-weight: 600;
-
   font-size: 14px;
-
-  color:
-    var(--text);
-
 }
 
-
 .selected-brand {
-
-  color:
-    var(--secondary-text);
-
+  color: #888;
   font-size: 12px;
 
   margin-top: 4px;
-
 }
 
-
 .remove-boot {
-
   border: none;
 
   background: transparent;
 
   cursor: pointer;
 
-  font-size: 20px;
+  font-size: 18px;
 
-  color:
-    var(--secondary-text);
-
+  color: #999;
 }
-
 
 .remove-boot:hover {
-
-  color:
-    var(--text);
-
+  color: #333;
 }
 
 
-/* ================================
+/* =====================================================
    COMPARE BUTTON
-================================ */
+===================================================== */
 
 .compare-container {
-
   width: 100%;
 
   display: flex;
 
   justify-content: center;
 
-  margin:
-    20px 0 35px;
-
+  margin: 25px 0 35px;
 }
 
-
 .compare-button {
-
   position: relative;
 
   overflow: hidden;
 
   border:
-    1px solid var(--border);
+    1px solid rgba(255,255,255,0.15);
 
   outline: none;
 
   cursor: pointer;
 
-  color:
-    var(--button-text);
+  color: white;
 
   background:
-    var(--button);
+    linear-gradient(
+      145deg,
+      #3b3f43,
+      #17191b
+    );
 
   padding:
     15px 36px;
@@ -523,389 +276,240 @@ body {
 
   font-weight: 600;
 
-  border-radius:
-    13px;
+  border-radius: 13px;
 
   box-shadow:
-
-    0 6px 20px
-    var(--shadow),
-
-    0 0 18px
-    rgba(127,127,127,0.12);
+    0 6px 20px rgba(0,0,0,0.25),
+    0 0 18px rgba(255,255,255,0.08);
 
   transition:
-
     transform 0.25s ease,
-
     box-shadow 0.25s ease,
-
     border-color 0.25s ease;
-
 }
 
-
-/* MOUSE GLOW */
-
 .compare-button::before {
-
   content: "";
 
   position: absolute;
 
   width: 150px;
-
   height: 150px;
 
-  left:
-    var(--mouse-x, 50%);
-
-  top:
-    var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  top: var(--mouse-y, 50%);
 
   transform:
     translate(-50%, -50%);
 
   background:
-
     radial-gradient(
-
       circle,
-
-      rgba(127,127,127,0.45),
-
-      rgba(127,127,127,0.15)
-      30%,
-
-      transparent
-      70%
-
+      rgba(255,255,255,0.45),
+      rgba(255,255,255,0.15) 30%,
+      transparent 70%
     );
 
   opacity: 0;
 
   pointer-events: none;
-
 }
-
 
 .compare-button:hover::before {
-
   opacity: 1;
-
 }
-
 
 .compare-button:hover {
-
-  transform:
-    translateY(-2px);
+  transform: translateY(-2px);
 
   border-color:
-    var(--text);
+    rgba(255,255,255,0.45);
 
   box-shadow:
-
-    0 8px 25px
-    var(--shadow),
-
-    0 0 8px
-    rgba(127,127,127,0.35),
-
-    0 0 22px
-    rgba(127,127,127,0.28),
-
-    0 0 45px
-    rgba(127,127,127,0.16);
-
+    0 8px 25px rgba(0,0,0,0.3),
+    0 0 8px rgba(255,255,255,0.25),
+    0 0 22px rgba(255,255,255,0.25),
+    0 0 45px rgba(255,255,255,0.12);
 }
-
-
-/* ================================
-   NEON EFFECT
-================================ */
 
 .compare-button.neon {
-
   animation:
-    neonPulse
-    0.7s
-    ease-out;
-
+    neonPulse 0.7s ease-out;
 }
-
 
 @keyframes neonPulse {
 
   0% {
-
     box-shadow:
-      0 0 5px
-      rgba(127,127,127,0.2);
-
+      0 0 5px rgba(255,255,255,0.2);
   }
 
   40% {
-
     box-shadow:
-
-      0 0 8px
-      rgba(127,127,127,0.8),
-
-      0 0 20px
-      rgba(127,127,127,0.65),
-
-      0 0 40px
-      rgba(127,127,127,0.45);
-
+      0 0 8px rgba(255,255,255,0.7),
+      0 0 20px rgba(255,255,255,0.6),
+      0 0 40px rgba(255,255,255,0.4);
   }
 
   100% {
-
     box-shadow:
-      0 0 0
-      rgba(127,127,127,0);
-
+      0 0 0 rgba(255,255,255,0);
   }
 
 }
 
 
-/* ================================
+/* =====================================================
    RESULTS
-================================ */
+===================================================== */
 
 .comparison-result {
-
   display: none;
 
   margin-top: 20px;
 
   animation:
-    fadeIn
-    0.4s
-    ease;
-
+    fadeIn 0.4s ease;
 }
-
 
 .comparison-result.show {
-
   display: block;
-
 }
-
 
 @keyframes fadeIn {
 
   from {
-
     opacity: 0;
-
-    transform:
-      translateY(10px);
-
+    transform: translateY(10px);
   }
 
   to {
-
     opacity: 1;
-
-    transform:
-      translateY(0);
-
+    transform: translateY(0);
   }
 
 }
 
 
-/* ================================
-   BOOT CARDS
-================================ */
+/* =====================================================
+   FOUR BOOT RESULT CARDS
+===================================================== */
 
 .boots {
-
   display: grid;
 
   grid-template-columns:
-    1fr 1fr;
+    repeat(4, 1fr);
 
-  gap: 20px;
-
+  gap: 15px;
 }
-
 
 .boot-card {
-
-  background:
-    var(--card);
+  background: white;
 
   border:
-    1px solid var(--border);
+    1px solid #e5e5e5;
 
-  border-radius:
-    18px;
+  border-radius: 18px;
 
-  padding: 25px;
+  padding: 20px;
 
   box-shadow:
-    0 5px 20px
-    var(--shadow);
-
-  transition:
-
-    background 0.3s ease,
-
-    border 0.3s ease;
-
+    0 5px 20px rgba(0,0,0,0.07);
 }
-
 
 .boot-card h2 {
-
   margin-top: 0;
 
-  font-size: 22px;
+  font-size: 19px;
 
-  color:
-    var(--text);
+  color: #333;
 
+  line-height: 1.25;
 }
 
-
 .result-image {
-
   width: 100%;
 
-  height: 180px;
+  height: 150px;
 
   object-fit: contain;
 
   margin-bottom: 10px;
-
 }
 
-
 .stat {
-
   display: flex;
 
   justify-content:
     space-between;
 
-  padding:
-    13px 0;
+  gap: 10px;
+
+  padding: 11px 0;
 
   border-bottom:
-    1px solid var(--border);
+    1px solid #eee;
 
-  font-size: 15px;
-
+  font-size: 13px;
 }
-
 
 .stat:last-child {
-
   border-bottom: none;
-
 }
-
 
 .stat-name {
-
-  color:
-    var(--secondary-text);
-
+  color: #777;
 }
 
-
 .stat-value {
-
   font-weight: 600;
 
-  color:
-    var(--text);
+  color: #333;
 
   text-align: right;
 
-  max-width: 60%;
-
+  max-width: 65%;
 }
 
-
 .winner {
-
   margin-top: 20px;
 
   padding: 15px;
 
-  background:
-    var(--soft);
+  background: #f1f1f1;
 
   border-radius: 12px;
 
   text-align: center;
 
   font-weight: 600;
-
-  color:
-    var(--text);
-
 }
 
 
-/* NIKE LINK */
-
-.nike-product-link {
-
-  display: block;
-
-  text-align: center;
-
-  padding: 12px;
-
-  margin-bottom: 15px;
-
-  background:
-    var(--soft);
-
-  border-radius: 10px;
-
-  color:
-    var(--text);
-
-  text-decoration: none;
-
-}
-
-
-.nike-product-link:hover {
-
-  background:
-    var(--hover);
-
-}
-
-
-/* ================================
+/* =====================================================
    MOBILE
-================================ */
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .boots {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
 
 @media (max-width: 700px) {
 
-  .boot-selection,
-  .boots {
-
+  .boot-selection {
     grid-template-columns:
       1fr;
-
   }
 
-  body {
-
-    padding:
-      25px 14px;
-
+  .boots {
+    grid-template-columns:
+      1fr;
   }
 
 }
@@ -921,7 +525,10 @@ body {
 <div class="comparison-container">
 
 
-  <!-- SEARCH AREA -->
+  <!-- =================================================
+       FOUR BOOT SEARCH BOXES
+  ================================================= -->
+
 
   <div class="boot-selection">
 
@@ -987,10 +594,76 @@ body {
 
     </div>
 
+
+    <!-- BOOT 3 -->
+
+    <div class="boot-selector">
+
+      <h3>Boot 3</h3>
+
+      <div class="search-wrapper">
+
+        <input
+          type="text"
+          class="boot-search"
+          id="search3"
+          placeholder="Search for a boot..."
+          autocomplete="off"
+        >
+
+        <div
+          class="suggestions"
+          id="suggestions3">
+        </div>
+
+      </div>
+
+      <div
+        class="selected-boot"
+        id="selected3">
+      </div>
+
+    </div>
+
+
+    <!-- BOOT 4 -->
+
+    <div class="boot-selector">
+
+      <h3>Boot 4</h3>
+
+      <div class="search-wrapper">
+
+        <input
+          type="text"
+          class="boot-search"
+          id="search4"
+          placeholder="Search for a boot..."
+          autocomplete="off"
+        >
+
+        <div
+          class="suggestions"
+          id="suggestions4">
+        </div>
+
+      </div>
+
+      <div
+        class="selected-boot"
+        id="selected4">
+      </div>
+
+    </div>
+
+
   </div>
 
 
-  <!-- COMPARE BUTTON -->
+  <!-- =================================================
+       COMPARE BUTTON
+  ================================================= -->
+
 
   <div class="compare-container">
 
@@ -1005,7 +678,10 @@ body {
   </div>
 
 
-  <!-- RESULTS -->
+  <!-- =================================================
+       RESULTS
+  ================================================= -->
+
 
   <div
     class="comparison-result"
@@ -1015,7 +691,7 @@ body {
     <div class="boots">
 
 
-      <!-- BOOT 1 RESULT -->
+      <!-- RESULT 1 -->
 
       <div class="boot-card">
 
@@ -1029,7 +705,6 @@ body {
         <h2 id="resultBoot1">
           Boot 1
         </h2>
-
 
         <div class="stat">
           <span class="stat-name">Speed</span>
@@ -1069,7 +744,7 @@ body {
       </div>
 
 
-      <!-- BOOT 2 RESULT -->
+      <!-- RESULT 2 -->
 
       <div class="boot-card">
 
@@ -1083,7 +758,6 @@ body {
         <h2 id="resultBoot2">
           Boot 2
         </h2>
-
 
         <div class="stat">
           <span class="stat-name">Speed</span>
@@ -1122,6 +796,113 @@ body {
 
       </div>
 
+
+      <!-- RESULT 3 -->
+
+      <div class="boot-card">
+
+        <img
+          class="result-image"
+          id="resultImage3"
+          src=""
+          alt=""
+        >
+
+        <h2 id="resultBoot3">
+          Boot 3
+        </h2>
+
+        <div class="stat">
+          <span class="stat-name">Speed</span>
+          <span class="stat-value" id="speed3">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Control</span>
+          <span class="stat-value" id="control3">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Comfort</span>
+          <span class="stat-value" id="comfort3">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Weight</span>
+          <span class="stat-value" id="weight3">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Price</span>
+          <span class="stat-value" id="price3">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Surface</span>
+          <span class="stat-value" id="surface3">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Technology</span>
+          <span class="stat-value" id="technology3">—</span>
+        </div>
+
+      </div>
+
+
+      <!-- RESULT 4 -->
+
+      <div class="boot-card">
+
+        <img
+          class="result-image"
+          id="resultImage4"
+          src=""
+          alt=""
+        >
+
+        <h2 id="resultBoot4">
+          Boot 4
+        </h2>
+
+        <div class="stat">
+          <span class="stat-name">Speed</span>
+          <span class="stat-value" id="speed4">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Control</span>
+          <span class="stat-value" id="control4">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Comfort</span>
+          <span class="stat-value" id="comfort4">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Weight</span>
+          <span class="stat-value" id="weight4">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Price</span>
+          <span class="stat-value" id="price4">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Surface</span>
+          <span class="stat-value" id="surface4">—</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-name">Technology</span>
+          <span class="stat-value" id="technology4">—</span>
+        </div>
+
+      </div>
+
+
     </div>
 
 
@@ -1133,12 +914,15 @@ body {
 
     </div>
 
+
   </div>
+
 
 </div>
 
 
 <script>
+
 
 /* =====================================================
    FOOTBALL BOOT DATABASE
@@ -1151,13 +935,10 @@ const boots = [
       "Nike Mercurial Superfly 11 Elite FG",
 
     brand:
-      "Nike",
-
-    productPage:
-      "https://www.nike.com/gb/t/mercurial-superfly-11-elite-firm-ground-low-top-football-boots-kSXagTAt/IF8507-101",
+      "Nike Mercurial",
 
     image:
-      "",
+      "https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/29dc7821-c782-4603-94d0-09334c0870ea/ZM+SUPERFLY+11+ELITE+FG.png",
 
     speed:
       "10/10",
@@ -1169,54 +950,49 @@ const boots = [
       "8.5/10",
 
     weight:
-      "170g",
+      "Approx. 170g",
 
     price:
-      "£254.99–£264.99",
+      "£264.99",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
-      "Forefoot Air Zoom + ZoomX foam + FlyWeave Ultra"
-
+      "Air Zoom + ZoomX + FlyWeave Ultra"
   },
 
 
   {
     name:
-      "Nike Mercurial Vapor 16 Elite FG",
+      "Nike Mercurial Vapor 17 Elite FG",
 
     brand:
-      "Nike",
+      "Nike Mercurial",
 
     image:
-      "https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/88c36b8b-d410-4974-807b-86277e4181b4/ZM+VAPOR+16+ELITE+FG.png",
-
-    productPage:
-      "https://www.nike.com/gb/",
+      "",
 
     speed:
-      "9.5/10",
+      "10/10",
 
     control:
-      "9/10",
+      "8.5/10",
 
     comfort:
       "8/10",
 
     weight:
-      "178g",
+      "Lightweight",
 
     price:
-      "£234.99–£244.99",
+      "£254.99",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
-      "3/4-length Air Zoom + Vaporposite+"
-
+      "Flylite plate + AtomKnit"
   },
 
 
@@ -1229,9 +1005,6 @@ const boots = [
 
     image:
       "",
-
-    productPage:
-      "https://www.nike.com/gb/",
 
     speed:
       "8.5/10",
@@ -1249,11 +1022,10 @@ const boots = [
       "Elite price varies",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
       "Gripknit + Cyclone 360"
-
   },
 
 
@@ -1266,9 +1038,6 @@ const boots = [
 
     image:
       "",
-
-    productPage:
-      "https://www.nike.com/gb/",
 
     speed:
       "8/10",
@@ -1286,11 +1055,10 @@ const boots = [
       "Academy price varies",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
       "NikeSkin + textured touch area"
-
   },
 
 
@@ -1303,9 +1071,6 @@ const boots = [
 
     image:
       "",
-
-    productPage:
-      "https://www.nike.com/gb/",
 
     speed:
       "8/10",
@@ -1323,11 +1088,10 @@ const boots = [
       "Elite price varies",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
       "FlyTouch Plus + flexible plate"
-
   },
 
 
@@ -1340,9 +1104,6 @@ const boots = [
 
     image:
       "",
-
-    productPage:
-      "https://www.nike.com/gb/",
 
     speed:
       "7.5/10",
@@ -1360,11 +1121,10 @@ const boots = [
       "Academy price varies",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
       "Synthetic upper + padded touch"
-
   },
 
 
@@ -1377,9 +1137,6 @@ const boots = [
 
     image:
       "",
-
-    productPage:
-      "https://www.adidas.co.uk/",
 
     speed:
       "9.5/10",
@@ -1397,11 +1154,10 @@ const boots = [
       "Elite price varies",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
       "Speedskin + lightweight Speedframe"
-
   },
 
 
@@ -1414,9 +1170,6 @@ const boots = [
 
     image:
       "",
-
-    productPage:
-      "https://uk.puma.com/",
 
     speed:
       "8.5/10",
@@ -1434,11 +1187,10 @@ const boots = [
       "£220",
 
     surface:
-      "Firm Ground (FG)",
+      "Firm Ground",
 
     technology:
       "FUZIONPODS + 3D grip zones + FLEXGILITY"
-
   }
 
 ];
@@ -1449,8 +1201,9 @@ const boots = [
 ===================================================== */
 
 let selectedBoot1 = null;
-
 let selectedBoot2 = null;
+let selectedBoot3 = null;
+let selectedBoot4 = null;
 
 
 /* =====================================================
@@ -1468,9 +1221,7 @@ function showSuggestions(
       .toLowerCase()
       .trim();
 
-
   suggestionsBox.innerHTML = "";
-
 
   const matches =
     boots.filter(
@@ -1495,7 +1246,7 @@ function showSuggestions(
       <div style="
         padding:18px;
         text-align:center;
-        color:var(--secondary-text);
+        color:#888;
         font-size:14px;
       ">
 
@@ -1508,7 +1259,6 @@ function showSuggestions(
     suggestionsBox.classList.add("show");
 
     return;
-
   }
 
 
@@ -1518,25 +1268,36 @@ function showSuggestions(
       const item =
         document.createElement("div");
 
-
       item.className =
         "suggestion";
 
 
-      const imageHTML = boot.image
+      const imageHTML =
+        boot.image
 
         ?
 
         `<img
-          src="${boot.image}"
-          alt="${boot.name}"
-        >`
+           src="${boot.image}"
+           alt="${boot.name}"
+         >`
 
         :
 
-        `<div class="suggestion-placeholder">
-          Image<br>coming soon
-        </div>`;
+        `<div style="
+           width:65px;
+           height:50px;
+           border-radius:8px;
+           background:#f1f1f1;
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           font-size:10px;
+           color:#999;
+           text-align:center;
+         ">
+           Image<br>coming soon
+         </div>`;
 
 
       item.innerHTML = `
@@ -1571,7 +1332,8 @@ function showSuggestions(
       );
 
 
-      suggestionsBox.appendChild(item);
+      suggestionsBox
+        .appendChild(item);
 
     }
   );
@@ -1595,42 +1357,46 @@ function selectBoot(
 
     selectedBoot1 = boot;
 
-    document
-      .getElementById("search1")
-      .value = "";
-
-    document
-      .getElementById("suggestions1")
-      .classList
-      .remove("show");
-
-    showSelectedBoot(
-      boot,
-      "selected1"
-    );
-
   }
-
 
   if (selectionNumber === 2) {
 
     selectedBoot2 = boot;
 
-    document
-      .getElementById("search2")
-      .value = "";
+  }
 
-    document
-      .getElementById("suggestions2")
-      .classList
-      .remove("show");
+  if (selectionNumber === 3) {
 
-    showSelectedBoot(
-      boot,
-      "selected2"
-    );
+    selectedBoot3 = boot;
 
   }
+
+  if (selectionNumber === 4) {
+
+    selectedBoot4 = boot;
+
+  }
+
+
+  document
+    .getElementById(
+      "search" + selectionNumber
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "suggestions" + selectionNumber
+    )
+    .classList
+    .remove("show");
+
+
+  showSelectedBoot(
+    boot,
+    "selected" + selectionNumber
+  );
 
 }
 
@@ -1650,20 +1416,32 @@ function showSelectedBoot(
     );
 
 
-  const imageHTML = boot.image
+  const imageHTML =
+    boot.image
 
     ?
 
     `<img
-      src="${boot.image}"
-      alt="${boot.name}"
-    >`
+       src="${boot.image}"
+       alt="${boot.name}"
+     >`
 
     :
 
-    `<div class="selected-placeholder">
-      Image<br>coming soon
-    </div>`;
+    `<div style="
+       width:70px;
+       height:55px;
+       border-radius:8px;
+       background:#fff;
+       display:flex;
+       align-items:center;
+       justify-content:center;
+       font-size:10px;
+       color:#999;
+       text-align:center;
+     ">
+       Image<br>coming soon
+     </div>`;
 
 
   element.innerHTML = `
@@ -1716,23 +1494,32 @@ function removeBoot(
 
   element.innerHTML = "";
 
-  element.classList.remove("show");
+  element.classList.remove(
+    "show"
+  );
 
 
-  if (
-    elementId === "selected1"
-  ) {
+  if (elementId === "selected1") {
 
     selectedBoot1 = null;
 
   }
 
-
-  if (
-    elementId === "selected2"
-  ) {
+  if (elementId === "selected2") {
 
     selectedBoot2 = null;
+
+  }
+
+  if (elementId === "selected3") {
+
+    selectedBoot3 = null;
+
+  }
+
+  if (elementId === "selected4") {
+
+    selectedBoot4 = null;
 
   }
 
@@ -1740,91 +1527,54 @@ function removeBoot(
 
 
 /* =====================================================
-   SEARCH EVENTS
+   SEARCH BOXES
 ===================================================== */
 
-document
-  .getElementById("search1")
-  .addEventListener(
+for (
+  let i = 1;
+  i <= 4;
+  i++
+) {
+
+  const searchInput =
+    document.getElementById(
+      "search" + i
+    );
+
+  const suggestionsBox =
+    document.getElementById(
+      "suggestions" + i
+    );
+
+
+  searchInput.addEventListener(
     "input",
     function() {
 
       showSuggestions(
         this,
-
-        document.getElementById(
-          "suggestions1"
-        ),
-
-        1
+        suggestionsBox,
+        i
       );
 
     }
   );
 
 
-document
-  .getElementById("search2")
-  .addEventListener(
-    "input",
-    function() {
-
-      showSuggestions(
-        this,
-
-        document.getElementById(
-          "suggestions2"
-        ),
-
-        2
-      );
-
-    }
-  );
-
-
-/* =====================================================
-   FOCUS EVENTS
-===================================================== */
-
-document
-  .getElementById("search1")
-  .addEventListener(
+  searchInput.addEventListener(
     "focus",
     function() {
 
       showSuggestions(
         this,
-
-        document.getElementById(
-          "suggestions1"
-        ),
-
-        1
+        suggestionsBox,
+        i
       );
 
     }
   );
 
-
-document
-  .getElementById("search2")
-  .addEventListener(
-    "focus",
-    function() {
-
-      showSuggestions(
-        this,
-
-        document.getElementById(
-          "suggestions2"
-        ),
-
-        2
-      );
-
-    }
-  );
+}
 
 
 /* =====================================================
@@ -1872,7 +1622,7 @@ compareButton.addEventListener(
 
 
 /* =====================================================
-   COMPARE
+   COMPARE BUTTON
 ===================================================== */
 
 compareButton.addEventListener(
@@ -1894,11 +1644,13 @@ compareButton.addEventListener(
 
     if (
       !selectedBoot1 ||
-      !selectedBoot2
+      !selectedBoot2 ||
+      !selectedBoot3 ||
+      !selectedBoot4
     ) {
 
       alert(
-        "Please select two boots first."
+        "Please select four boots first."
       );
 
       return;
@@ -1915,6 +1667,18 @@ compareButton.addEventListener(
     updateResult(
       selectedBoot2,
       2
+    );
+
+
+    updateResult(
+      selectedBoot3,
+      3
+    );
+
+
+    updateResult(
+      selectedBoot4,
+      4
     );
 
 
@@ -1935,7 +1699,11 @@ compareButton.addEventListener(
       "⚡ " +
       selectedBoot1.name +
       " vs " +
-      selectedBoot2.name;
+      selectedBoot2.name +
+      " vs " +
+      selectedBoot3.name +
+      " vs " +
+      selectedBoot4.name;
 
   }
 );
@@ -1949,6 +1717,37 @@ function updateResult(
   boot,
   number
 ) {
+
+  const image =
+    document.getElementById(
+      "resultImage" + number
+    );
+
+
+  if (boot.image) {
+
+    image.src =
+      boot.image;
+
+    image.alt =
+      boot.name;
+
+    image.style.display =
+      "block";
+
+  }
+
+  else {
+
+    image.removeAttribute(
+      "src"
+    );
+
+    image.style.display =
+      "none";
+
+  }
+
 
   document
     .getElementById(
@@ -2013,86 +1812,6 @@ function updateResult(
     .textContent =
     boot.technology;
 
-
-  const image =
-    document.getElementById(
-      "resultImage" + number
-    );
-
-
-  const card =
-    image.parentElement;
-
-
-  const oldLink =
-    card.querySelector(
-      ".nike-product-link"
-    );
-
-
-  if (oldLink) {
-
-    oldLink.remove();
-
-  }
-
-
-  if (boot.image) {
-
-    image.src =
-      boot.image;
-
-    image.alt =
-      boot.name;
-
-    image.style.display =
-      "block";
-
-  }
-
-  else {
-
-    image.removeAttribute("src");
-
-    image.style.display =
-      "none";
-
-
-    if (boot.productPage) {
-
-      const nikeLink =
-        document.createElement("a");
-
-
-      nikeLink.className =
-        "nike-product-link";
-
-
-      nikeLink.href =
-        boot.productPage;
-
-
-      nikeLink.target =
-        "_blank";
-
-
-      nikeLink.rel =
-        "noopener noreferrer";
-
-
-      nikeLink.textContent =
-        "View this boot →";
-
-
-      card.insertBefore(
-        nikeLink,
-        image.nextSibling
-      );
-
-    }
-
-  }
-
 }
 
 
@@ -2110,20 +1829,20 @@ document.addEventListener(
       )
     ) {
 
-      document
-        .getElementById(
-          "suggestions1"
-        )
-        .classList
-        .remove("show");
+      for (
+        let i = 1;
+        i <= 4;
+        i++
+      ) {
 
+        document
+          .getElementById(
+            "suggestions" + i
+          )
+          .classList
+          .remove("show");
 
-      document
-        .getElementById(
-          "suggestions2"
-        )
-        .classList
-        .remove("show");
+      }
 
     }
 
@@ -2133,8 +1852,5 @@ document.addEventListener(
 </script>
 
 </body>
-</html>
-</script>
 
-</body>
 </html>
