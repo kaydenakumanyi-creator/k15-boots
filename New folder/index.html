@@ -4,1402 +4,914 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Football Boot Comparison</title>
+<title>K15 Football Boot Comparison</title>
 
 <style>
-
-/* =====================================================
-   THEME
-===================================================== */
-
 :root {
-  color-scheme: light dark;
+    color-scheme: light dark;
 
-  --page-bg: #f2f3f5;
-  --surface: rgba(255,255,255,0.82);
-  --surface-solid: #ffffff;
-  --input-bg: rgba(248,248,249,0.95);
+    --bg: #f2f3f5;
+    --card: rgba(255,255,255,0.85);
+    --input: #ffffff;
+    --text: #171717;
+    --muted: #777;
+    --border: rgba(0,0,0,0.12);
+    --shadow: rgba(0,0,0,0.12);
 
-  --text: #202124;
-  --heading: #151515;
-  --muted: #777b82;
-
-  --border: rgba(0,0,0,0.10);
-  --soft-border: rgba(0,0,0,0.07);
-  --shadow: rgba(0,0,0,0.10);
-
-  --button-start: #eeeeee;
-  --button-end: #cfd2d5;
-  --button-text: #161616;
-
-  --texture-dot: rgba(0,0,0,0.035);
+    --button1: #eeeeee;
+    --button2: #c7c9cc;
 }
-
-@media (prefers-color-scheme: dark) {
-
-  :root {
-
-    --page-bg: #191919;
-    --surface: rgba(31,31,33,0.86);
-    --surface-solid: #222224;
-    --input-bg: rgba(37,37,39,0.96);
-
-    --text: #eeeeee;
-    --heading: #ffffff;
-    --muted: #a7a7ad;
-
-    --border: rgba(255,255,255,0.12);
-    --soft-border: rgba(255,255,255,0.08);
-    --shadow: rgba(0,0,0,0.35);
-
-    --button-start: #f2f2f2;
-    --button-end: #bfc2c5;
-    --button-text: #111111;
-
-    --texture-dot: rgba(255,255,255,0.035);
-  }
-}
-
-
-/* =====================================================
-   MANUAL LIGHT THEME
-===================================================== */
-
-html[data-theme="light"] {
-
-  color-scheme: light;
-
-  --page-bg: #f2f3f5;
-  --surface: rgba(255,255,255,0.82);
-  --surface-solid: #ffffff;
-  --input-bg: rgba(248,248,249,0.95);
-
-  --text: #202124;
-  --heading: #151515;
-  --muted: #777b82;
-
-  --border: rgba(0,0,0,0.10);
-  --soft-border: rgba(0,0,0,0.07);
-  --shadow: rgba(0,0,0,0.10);
-
-  --button-start: #eeeeee;
-  --button-end: #cfd2d5;
-  --button-text: #161616;
-
-  --texture-dot: rgba(0,0,0,0.035);
-}
-
-
-/* =====================================================
-   MANUAL DARK THEME
-===================================================== */
 
 html[data-theme="dark"] {
+    color-scheme: dark;
 
-  color-scheme: dark;
+    --bg: #151515;
+    --card: rgba(30,30,32,0.9);
+    --input: #242426;
+    --text: #f5f5f5;
+    --muted: #aaa;
+    --border: rgba(255,255,255,0.13);
+    --shadow: rgba(0,0,0,0.45);
 
-  --page-bg: #191919;
-  --surface: rgba(31,31,33,0.86);
-  --surface-solid: #222224;
-  --input-bg: rgba(37,37,39,0.96);
-
-  --text: #eeeeee;
-  --heading: #ffffff;
-  --muted: #a7a7ad;
-
-  --border: rgba(255,255,255,0.12);
-  --soft-border: rgba(255,255,255,0.08);
-  --shadow: rgba(0,0,0,0.35);
-
-  --button-start: #f2f2f2;
-  --button-end: #bfc2c5;
-  --button-text: #111111;
-
-  --texture-dot: rgba(255,255,255,0.035);
+    --button1: #eeeeee;
+    --button2: #bfc1c4;
 }
-
-
-/* =====================================================
-   GENERAL
-===================================================== */
 
 * {
-  box-sizing: border-box;
-}
-
-html {
-  background: transparent;
+    box-sizing: border-box;
 }
 
 body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 35px 20px 60px;
 
-  margin: 0;
-  padding: 32px 20px 50px;
+    font-family: Arial, Helvetica, sans-serif;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+    color: var(--text);
 
-  color: var(--text);
+    background:
+        radial-gradient(circle at 15% 10%,
+        rgba(255,255,255,.15),
+        transparent 30%),
+        radial-gradient(circle at 85% 90%,
+        rgba(255,255,255,.08),
+        transparent 30%),
+        var(--bg);
 
-  background:
-
-    radial-gradient(
-      circle at 15% 10%,
-      rgba(255,255,255,0.08),
-      transparent 28%
-    ),
-
-    radial-gradient(
-      circle at 85% 85%,
-      rgba(255,255,255,0.05),
-      transparent 30%
-    ),
-
-    radial-gradient(
-      var(--texture-dot) 1px,
-      transparent 1px
-    );
-
-  background-size:
-    auto,
-    auto,
-    18px 18px;
-
-  transition:
-    color .3s ease;
+    transition: background .3s ease, color .3s ease;
 }
 
-body::before {
-
-  content: "";
-
-  position: fixed;
-
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      135deg,
-      transparent 0%,
-      rgba(255,255,255,0.025) 45%,
-      transparent 70%
-    );
-
-  z-index: -1;
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
 }
 
+/* =========================
+   TOP
+========================= */
 
-.comparison-container {
-
-  max-width: 1100px;
-
-  margin: auto;
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
+.title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+}
 
-/* =====================================================
-   THEME BUTTON
-===================================================== */
-
-.top-controls {
-
-  display: flex;
-
-  justify-content: flex-end;
-
-  margin-bottom: 14px;
+.subtitle {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 14px;
 }
 
 .theme-button {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
 
-  border: 1px solid var(--border);
+    padding: 9px 15px;
+    border-radius: 999px;
 
-  background: var(--surface);
+    cursor: pointer;
 
-  color: var(--text);
+    backdrop-filter: blur(15px);
 
-  border-radius: 999px;
-
-  padding: 8px 13px;
-
-  font-size: 12px;
-
-  cursor: pointer;
-
-  backdrop-filter: blur(12px);
-
-  transition:
-    transform .2s ease,
-    background .2s ease,
-    border .2s ease;
+    transition: .2s ease;
 }
 
 .theme-button:hover {
-
-  transform: translateY(-1px);
-
-  border-color: rgba(255,255,255,.3);
+    transform: translateY(-2px);
 }
 
-
-/* =====================================================
+/* =========================
    BOOT SELECTION
-===================================================== */
+========================= */
 
 .boot-selection {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
 }
 
 .boot-selector {
-
-  position: relative;
+    position: relative;
 }
 
 .boot-label {
+    display: block;
+    margin-bottom: 8px;
 
-  display: block;
-
-  margin-bottom: 10px;
-
-  font-size: 16px;
-
-  font-weight: 600;
-
-  color: var(--heading);
+    font-size: 14px;
+    font-weight: 700;
 }
 
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
 .search-wrapper {
-
-  position: relative;
+    position: relative;
 }
 
 .boot-search {
+    width: 100%;
 
-  width: 100%;
+    padding: 15px 16px;
 
-  padding: 15px 17px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
 
-  border: 1px solid var(--border);
+    background: var(--input);
+    color: var(--text);
 
-  border-radius: 13px;
+    font-size: 15px;
 
-  background: var(--input-bg);
+    outline: none;
 
-  color: var(--text);
-
-  font-size: 15px;
-
-  outline: none;
-
-  transition:
-    border .2s ease,
-    box-shadow .2s ease,
-    background .3s ease,
-    color .3s ease;
-}
-
-.boot-search::placeholder {
-
-  color: var(--muted);
+    transition: .2s ease;
 }
 
 .boot-search:focus {
+    border-color: rgba(255,255,255,.7);
 
-  border-color:
-    rgba(255,255,255,.45);
-
-  box-shadow:
-
-    0 0 0 3px
-      rgba(255,255,255,.06),
-
-    0 8px 25px
-      var(--shadow);
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,.08),
+        0 8px 25px var(--shadow);
 }
 
-
-/* =====================================================
+/* =========================
    SUGGESTIONS
-===================================================== */
+========================= */
 
 .suggestions {
+    position: absolute;
 
-  position: absolute;
+    top: calc(100% + 7px);
+    left: 0;
+    right: 0;
 
-  top: calc(100% + 7px);
+    display: none;
 
-  left: 0;
+    background: var(--card);
 
-  right: 0;
+    border: 1px solid var(--border);
+    border-radius: 15px;
 
-  background:
-    var(--surface-solid);
+    box-shadow: 0 15px 40px var(--shadow);
 
-  border-radius: 14px;
+    overflow: hidden;
 
-  border: 1px solid var(--border);
+    z-index: 50;
 
-  box-shadow:
-    0 15px 40px var(--shadow);
-
-  overflow: hidden;
-
-  z-index: 100;
-
-  display: none;
+    backdrop-filter: blur(15px);
 }
 
 .suggestions.show {
-
-  display: block;
+    display: block;
 }
 
 .suggestion {
+    display: flex;
+    align-items: center;
 
-  display: flex;
+    gap: 12px;
 
-  align-items: center;
+    padding: 10px;
 
-  gap: 12px;
+    cursor: pointer;
 
-  padding: 10px;
-
-  cursor: pointer;
-
-  transition:
-    background .2s ease;
+    transition: .15s ease;
 }
 
 .suggestion:hover {
-
-  background:
-    rgba(128,128,128,.10);
+    background: rgba(128,128,128,.12);
 }
 
 .suggestion img,
 .suggestion-placeholder {
+    width: 58px;
+    height: 48px;
 
-  width: 50px;
+    object-fit: contain;
 
-  height: 50px;
+    border-radius: 9px;
 
-  object-fit: contain;
+    background: var(--input);
 
-  border-radius: 8px;
-
-  background:
-    var(--input-bg);
-
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 .suggestion-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 10px;
-
-  color: var(--muted);
-
-  text-align: center;
+    color: var(--muted);
+    font-size: 10px;
 }
 
 .suggestion-info {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
-
-  min-width: 0;
+    min-width: 0;
 }
 
 .suggestion-name {
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .suggestion-brand {
+    margin-top: 4px;
 
-  font-size: 12px;
+    color: var(--muted);
 
-  color: var(--muted);
+    font-size: 12px;
 }
 
-
-/* =====================================================
+/* =========================
    SELECTED BOOT
-===================================================== */
+========================= */
 
 .selected-boot {
+    display: none;
 
-  display: none;
+    align-items: center;
+    gap: 12px;
 
-  margin-top: 10px;
+    margin-top: 10px;
+    padding: 10px;
 
-  padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
 
-  border-radius: 13px;
+    background: var(--card);
 
-  background: var(--surface);
-
-  border: 1px solid var(--soft-border);
-
-  align-items: center;
-
-  gap: 12px;
-
-  backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
 }
 
 .selected-boot.show {
-
-  display: flex;
+    display: flex;
 }
 
 .selected-boot img,
 .selected-placeholder {
+    width: 75px;
+    height: 55px;
 
-  width: 70px;
+    object-fit: contain;
 
-  height: 55px;
+    border-radius: 9px;
 
-  object-fit: contain;
+    background: var(--input);
 
-  background:
-    var(--surface-solid);
-
-  border-radius: 8px;
-
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 .selected-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 10px;
-
-  color: var(--muted);
-
-  text-align: center;
+    color: var(--muted);
+    font-size: 10px;
 }
 
 .selected-info {
-
-  flex: 1;
-
-  min-width: 0;
+    flex: 1;
+    min-width: 0;
 }
 
 .selected-name {
-
-  font-weight: 600;
-
-  font-size: 14px;
-
-  color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .selected-brand {
+    margin-top: 4px;
 
-  color: var(--muted);
+    color: var(--muted);
 
-  font-size: 12px;
-
-  margin-top: 4px;
+    font-size: 12px;
 }
 
 .boot-page-link {
+    display: inline-block;
 
-  display: inline-block;
+    margin-top: 6px;
 
-  margin-top: 6px;
+    color: var(--text);
 
-  color: var(--text);
+    font-size: 11px;
+    font-weight: 700;
 
-  font-size: 11px;
-
-  font-weight: 600;
-
-  text-decoration: none;
-
-  opacity: .7;
-
-  transition:
-    opacity .2s ease;
+    text-decoration: none;
 }
 
 .boot-page-link:hover {
-
-  opacity: 1;
-
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .remove-boot {
+    border: none;
+    background: transparent;
 
-  border: none;
+    color: var(--muted);
 
-  background: transparent;
+    font-size: 20px;
 
-  cursor: pointer;
-
-  font-size: 18px;
-
-  color: var(--muted);
-
-  padding: 5px;
+    cursor: pointer;
 }
 
 .remove-boot:hover {
-
-  color: var(--text);
+    color: var(--text);
 }
 
-
-/* =====================================================
+/* =========================
    COMPARE BUTTON
-===================================================== */
+========================= */
 
 .compare-container {
+    display: flex;
+    justify-content: center;
 
-  width: 100%;
-
-  display: flex;
-
-  justify-content: center;
-
-  margin: 22px 0 35px;
+    margin: 28px 0 40px;
 }
 
 .compare-button {
+    position: relative;
 
-  position: relative;
+    overflow: hidden;
 
-  overflow: hidden;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 14px;
 
-  border:
-    1px solid rgba(255,255,255,.25);
+    padding: 15px 38px;
 
-  outline: none;
+    color: #111;
 
-  cursor: pointer;
+    background:
+        linear-gradient(
+            145deg,
+            var(--button1),
+            var(--button2)
+        );
 
-  color: var(--button-text);
+    font-size: 16px;
+    font-weight: 800;
 
-  background:
-    linear-gradient(
-      145deg,
-      var(--button-start),
-      var(--button-end)
-    );
+    cursor: pointer;
 
-  padding: 15px 36px;
+    box-shadow:
+        0 8px 25px var(--shadow),
+        0 0 15px rgba(255,255,255,.12);
 
-  font-size: 16px;
-
-  font-weight: 700;
-
-  border-radius: 13px;
-
-  box-shadow:
-
-    0 7px 22px
-      var(--shadow),
-
-    0 0 18px
-      rgba(255,255,255,.10);
-
-  transition:
-
-    transform .25s ease,
-
-    box-shadow .25s ease,
-
-    border-color .25s ease;
-}
-
-
-/* Mouse-following light */
-
-.compare-button::before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 180px;
-
-  height: 180px;
-
-  left:
-    var(--mouse-x, 50%);
-
-  top:
-    var(--mouse-y, 50%);
-
-  transform:
-    translate(-50%,-50%);
-
-  background:
-    radial-gradient(
-      circle,
-
-      rgba(255,255,255,.75),
-
-      rgba(255,255,255,.20) 32%,
-
-      transparent 70%
-    );
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition:
-    opacity .15s ease;
-}
-
-.compare-button:hover::before {
-
-  opacity: 1;
+    transition: .25s ease;
 }
 
 .compare-button:hover {
+    transform: translateY(-3px);
 
-  transform:
-    translateY(-2px);
-
-  border-color:
-    rgba(255,255,255,.65);
-
-  box-shadow:
-
-    0 9px 27px
-      var(--shadow),
-
-    0 0 10px
-      rgba(255,255,255,.30),
-
-    0 0 25px
-      rgba(255,255,255,.20),
-
-    0 0 45px
-      rgba(255,255,255,.10);
+    box-shadow:
+        0 10px 30px var(--shadow),
+        0 0 12px rgba(255,255,255,.5),
+        0 0 30px rgba(255,255,255,.2);
 }
 
+.compare-button::before {
+    content: "";
 
-/* =====================================================
-   RIPPLE
-===================================================== */
+    position: absolute;
 
-.ripple {
+    width: 180px;
+    height: 180px;
 
-  position: absolute;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
 
-  border-radius: 50%;
+    transform: translate(-50%, -50%);
 
-  pointer-events: none;
-
-  width: 10px;
-
-  height: 10px;
-
-  left:
-    var(--ripple-x);
-
-  top:
-    var(--ripple-y);
-
-  transform:
-    translate(-50%, -50%)
-    scale(0);
-
-  background:
-    rgba(255,255,255,.75);
-
-  box-shadow:
-
-    0 0 10px
-      rgba(255,255,255,.8),
-
-    0 0 25px
-      rgba(255,255,255,.55),
-
-    0 0 55px
-      rgba(255,255,255,.30);
-
-  animation:
-    rippleWave .8s ease-out forwards;
-}
-
-@keyframes rippleWave {
-
-  0% {
-
-    width: 10px;
-
-    height: 10px;
-
-    opacity: .95;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0);
-  }
-
-  55% {
-
-    opacity: .45;
-  }
-
-  100% {
-
-    width: 480px;
-
-    height: 480px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.8),
+            rgba(255,255,255,.2) 30%,
+            transparent 70%
+        );
 
     opacity: 0;
 
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
+    pointer-events: none;
+
+    transition: opacity .15s ease;
 }
 
-
-/* =====================================================
-   NEON EFFECT
-===================================================== */
-
-.compare-button.neon {
-
-  animation:
-    neonPulse .7s ease-out;
+.compare-button:hover::before {
+    opacity: 1;
 }
 
-@keyframes neonPulse {
-
-  0% {
-
-    box-shadow:
-      0 0 5px
-      rgba(255,255,255,.2);
-  }
-
-  40% {
-
-    box-shadow:
-
-      0 0 8px
-        rgba(255,255,255,.75),
-
-      0 0 20px
-        rgba(255,255,255,.65),
-
-      0 0 40px
-        rgba(255,255,255,.40);
-  }
-
-  100% {
-
-    box-shadow:
-      0 0 0
-      rgba(255,255,255,0);
-  }
+.compare-button span {
+    position: relative;
+    z-index: 2;
 }
 
+/* Ripple */
 
-/* =====================================================
+.ripple {
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.8);
+
+    box-shadow:
+        0 0 10px white,
+        0 0 30px white,
+        0 0 60px rgba(255,255,255,.5);
+
+    transform: translate(-50%,-50%);
+
+    animation: ripple .8s ease-out forwards;
+
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    from {
+        width: 10px;
+        height: 10px;
+        opacity: .9;
+    }
+
+    to {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+
+/* =========================
    RESULTS
-===================================================== */
+========================= */
 
 .comparison-result {
-
-  display: none;
-
-  margin-top: 20px;
-
-  animation:
-    fadeIn .4s ease;
+    display: none;
 }
 
 .comparison-result.show {
-
-  display: block;
+    display: block;
+    animation: fadeIn .5s ease;
 }
 
 @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 
-  from {
-
-    opacity: 0;
-
-    transform:
-      translateY(10px);
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .boots {
+    display: grid;
 
-  display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
 
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 18px;
+    gap: 18px;
 }
 
 .boot-card {
+    padding: 22px;
 
-  background:
-    var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
 
-  border:
-    1px solid var(--border);
+    background: var(--card);
 
-  border-radius: 18px;
+    box-shadow: 0 8px 25px var(--shadow);
 
-  padding: 25px;
-
-  box-shadow:
-    0 7px 25px
-    var(--shadow);
-
-  backdrop-filter:
-    blur(12px);
+    backdrop-filter: blur(15px);
 }
 
 .boot-card h2 {
+    margin: 15px 0;
 
-  margin-top: 0;
-
-  font-size: 22px;
-
-  color: var(--heading);
+    font-size: 19px;
 }
 
 .result-image {
+    width: 100%;
+    height: 150px;
 
-  width: 100%;
+    object-fit: contain;
 
-  height: 180px;
+    border-radius: 12px;
 
-  object-fit: contain;
-
-  background:
-    var(--surface-solid);
-
-  border-radius: 12px;
-
-  margin-bottom: 15px;
+    background: var(--input);
 }
 
 .stat {
+    display: flex;
+    justify-content: space-between;
 
-  display: flex;
+    gap: 15px;
 
-  justify-content: space-between;
+    padding: 12px 0;
 
-  padding: 13px 0;
+    border-bottom: 1px solid var(--border);
 
-  border-bottom:
-    1px solid
-    var(--soft-border);
-
-  font-size: 15px;
+    font-size: 14px;
 }
 
 .stat-name {
-
-  color: var(--muted);
+    color: var(--muted);
 }
 
 .stat-value {
+    text-align: right;
 
-  font-weight: 600;
-
-  color: var(--text);
-
-  text-align: right;
-
-  max-width: 60%;
+    font-weight: 700;
 }
 
 .winner {
+    margin-top: 22px;
+    padding: 17px;
 
-  margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
 
-  padding: 15px;
+    background: var(--card);
 
-  background:
-    var(--surface);
+    text-align: center;
 
-  border:
-    1px solid
-    var(--soft-border);
-
-  border-radius: 12px;
-
-  text-align: center;
-
-  font-weight: 600;
-
-  color: var(--text);
+    font-weight: 700;
 }
 
-
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
-  .boot-selection,
-  .boots {
+    body {
+        padding: 25px 14px 40px;
+    }
 
-    grid-template-columns:
-      1fr;
-  }
+    .top {
+        align-items: flex-start;
+    }
 
-  body {
+    .title {
+        font-size: 24px;
+    }
 
-    padding:
-      25px 14px 40px;
-  }
+    .boot-selection {
+        grid-template-columns: 1fr;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
 
+<div class="container">
 
-<div class="comparison-container">
+    <div class="top">
 
+        <div>
+            <h1 class="title">K15 Football Boots</h1>
 
-<!-- =====================================================
-     THEME
-===================================================== -->
+            <div class="subtitle">
+                Compare your favourite football boots
+            </div>
+        </div>
 
-<div class="top-controls">
+        <button
+            class="theme-button"
+            id="themeButton"
+            type="button">
+            Theme: Auto
+        </button>
 
-  <button
-    class="theme-button"
-    id="themeButton"
-    type="button"
-  >
-    Theme: Auto
-  </button>
-
-</div>
-
-
-<!-- =====================================================
-     BOOT SELECTORS
-===================================================== -->
-
-<div class="boot-selection">
+    </div>
 
 
-<!-- BOOT 1 -->
+    <!-- =========================
+         BOOT SELECTORS
+    ========================== -->
 
-<div class="boot-selector">
+    <div class="boot-selection">
 
-  <label
-    class="boot-label"
-    for="search1"
-  >
-    Boot 1
-  </label>
+        <div class="boot-selector">
 
-  <div class="search-wrapper">
+            <label class="boot-label">
+                Boot 1
+            </label>
 
-    <input
-      id="search1"
-      class="boot-search"
-      type="text"
-      placeholder="Search for a boot..."
-      autocomplete="off"
-    >
+            <div class="search-wrapper">
+
+                <input
+                    class="boot-search"
+                    id="search1"
+                    type="text"
+                    placeholder="Search for a boot..."
+                    autocomplete="off">
+
+                <div
+                    class="suggestions"
+                    id="suggestions1">
+                </div>
+
+            </div>
+
+            <div
+                class="selected-boot"
+                id="selected1">
+            </div>
+
+        </div>
+
+
+        <div class="boot-selector">
+
+            <label class="boot-label">
+                Boot 2
+            </label>
+
+            <div class="search-wrapper">
+
+                <input
+                    class="boot-search"
+                    id="search2"
+                    type="text"
+                    placeholder="Search for a boot..."
+                    autocomplete="off">
+
+                <div
+                    class="suggestions"
+                    id="suggestions2">
+                </div>
+
+            </div>
+
+            <div
+                class="selected-boot"
+                id="selected2">
+            </div>
+
+        </div>
+
+
+        <div class="boot-selector">
+
+            <label class="boot-label">
+                Boot 3
+            </label>
+
+            <div class="search-wrapper">
+
+                <input
+                    class="boot-search"
+                    id="search3"
+                    type="text"
+                    placeholder="Search for a boot..."
+                    autocomplete="off">
+
+                <div
+                    class="suggestions"
+                    id="suggestions3">
+                </div>
+
+            </div>
+
+            <div
+                class="selected-boot"
+                id="selected3">
+            </div>
+
+        </div>
+
+
+        <div class="boot-selector">
+
+            <label class="boot-label">
+                Boot 4
+            </label>
+
+            <div class="search-wrapper">
+
+                <input
+                    class="boot-search"
+                    id="search4"
+                    type="text"
+                    placeholder="Search for a boot..."
+                    autocomplete="off">
+
+                <div
+                    class="suggestions"
+                    id="suggestions4">
+                </div>
+
+            </div>
+
+            <div
+                class="selected-boot"
+                id="selected4">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         COMPARE BUTTON
+    ========================== -->
+
+    <div class="compare-container">
+
+        <button
+            class="compare-button"
+            id="compareButton"
+            type="button">
+
+            <span>Compare Boots</span>
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         RESULTS
+    ========================== -->
 
     <div
-      id="suggestions1"
-      class="suggestions"
-    ></div>
+        class="comparison-result"
+        id="comparisonResult">
 
-  </div>
+        <div
+            class="boots"
+            id="resultsGrid">
+        </div>
 
-  <div
-    id="selected1"
-    class="selected-boot"
-  ></div>
+        <div
+            class="winner"
+            id="winner">
+            ⚡ Select at least two boots above
+        </div>
 
-</div>
-
-
-<!-- BOOT 2 -->
-
-<div class="boot-selector">
-
-  <label
-    class="boot-label"
-    for="search2"
-  >
-    Boot 2
-  </label>
-
-  <div class="search-wrapper">
-
-    <input
-      id="search2"
-      class="boot-search"
-      type="text"
-      placeholder="Search for a boot..."
-      autocomplete="off"
-    >
-
-    <div
-      id="suggestions2"
-      class="suggestions"
-    ></div>
-
-  </div>
-
-  <div
-    id="selected2"
-    class="selected-boot"
-  ></div>
-
-</div>
-
-
-<!-- BOOT 3 -->
-
-<div class="boot-selector">
-
-  <label
-    class="boot-label"
-    for="search3"
-  >
-    Boot 3
-  </label>
-
-  <div class="search-wrapper">
-
-    <input
-      id="search3"
-      class="boot-search"
-      type="text"
-      placeholder="Search for a boot..."
-      autocomplete="off"
-    >
-
-    <div
-      id="suggestions3"
-      class="suggestions"
-    ></div>
-
-  </div>
-
-  <div
-    id="selected3"
-    class="selected-boot"
-  ></div>
-
-</div>
-
-
-<!-- BOOT 4 -->
-
-<div class="boot-selector">
-
-  <label
-    class="boot-label"
-    for="search4"
-  >
-    Boot 4
-  </label>
-
-  <div class="search-wrapper">
-
-    <input
-      id="search4"
-      class="boot-search"
-      type="text"
-      placeholder="Search for a boot..."
-      autocomplete="off"
-    >
-
-    <div
-      id="suggestions4"
-      class="suggestions"
-    ></div>
-
-  </div>
-
-  <div
-    id="selected4"
-    class="selected-boot"
-  ></div>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-     COMPARE BUTTON
-===================================================== -->
-
-<div class="compare-container">
-
-  <button
-    class="compare-button"
-    id="compareButton"
-    type="button"
-  >
-    Compare Boots
-  </button>
-
-</div>
-
-
-<!-- =====================================================
-     RESULTS
-===================================================== -->
-
-<div
-  class="comparison-result"
-  id="comparisonResult"
->
-
-  <div
-    class="boots"
-    id="resultsGrid"
-  ></div>
-
-  <div
-    class="winner"
-    id="winner"
-  >
-    ⚡ Select at least two boots above to compare them
-  </div>
-
-</div>
-
+    </div>
 
 </div>
 
 
 <script>
 
-
 /* =====================================================
-   FOOTBALL BOOT DATABASE
+   BOOT DATABASE
+
+   Add new boots here.
 ===================================================== */
 
 const boots = [
 
+    {
+        name: "Nike Mercurial Superfly 11 Elite FG",
+        brand: "Nike Mercurial",
 
-/* -----------------------------------------------------
-   NIKE MERCURIAL SUPERFLY 11
------------------------------------------------------ */
+        image:
+        "https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/29dc7821-c782-4603-94d0-09334c0870ea/ZM+SUPERFLY+11+ELITE+FG.png",
 
-{
-  name:
-    "Nike Mercurial Superfly 11 Elite FG",
+        productPage:
+        "https://www.nike.com/gb/t/mercurial-superfly-11-elite-firm-ground-low-top-football-boots-kSXagTAt/IF8507-101",
 
-  brand:
-    "Nike Mercurial",
+        speed: "10/10",
+        control: "8.5/10",
+        comfort: "8.5/10",
+        traction: "9/10",
 
-  image:
-    "https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/29dc7821-c782-4603-94d0-09334c0870ea/ZM+SUPERFLY+11+ELITE+FG.png",
+        surface: "Firm Ground",
 
-  productPage:
-    "https://www.nike.com/gb/t/mercurial-superfly-11-elite-firm-ground-low-top-football-boots-kSXagTAt/IF8507-101",
-
-  speed:
-    "10/10",
-
-  control:
-    "8.5/10",
-
-  comfort:
-    "8.5/10",
-
-  touch:
-    "9/10",
-
-  weight:
-    "Very Lightweight",
-
-  surface:
-    "Firm Ground",
-
-  technology:
-    "Air Zoom + Gripknit + Flex Frame"
-},
+        technology:
+        "Air Zoom + Gripknit + FLEXGILITY"
+    },
 
 
-/* -----------------------------------------------------
-   NIKE PHANTOM
------------------------------------------------------ */
+    {
+        name: "Nike Mercurial Vapor 16 Elite FG",
+        brand: "Nike Mercurial",
 
-{
-  name:
-    "Nike Phantom 6 High Elite FG",
+        image:
+        "https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,q_auto/0b9b2c8e-3b6d-4c48-8c52-6a7c2f4c1e7e/ZM+VAPOR+16+ELITE+FG.png",
 
-  brand:
-    "Nike Phantom",
+        productPage:
+        "https://www.nike.com/gb/",
 
-  image:
-    "",
+        speed: "10/10",
+        control: "8/10",
+        comfort: "8/10",
+        traction: "9/10",
 
-  productPage:
-    "https://www.nike.com/gb/w/phantom-football-shoes-1gdj0z4bqsgz",
+        surface: "Firm Ground",
 
-  speed:
-    "8/10",
-
-  control:
-    "10/10",
-
-  comfort:
-    "9/10",
-
-  touch:
-    "10/10",
-
-  weight:
-    "Lightweight",
-
-  surface:
-    "Firm Ground",
-
-  technology:
-    "Gripknit + Cyclone 360"
-},
+        technology:
+        "Air Zoom + Gripknit"
+    },
 
 
-/* -----------------------------------------------------
-   ADIDAS X
------------------------------------------------------ */
+    {
+        name: "adidas F50 Elite FG",
+        brand: "adidas F50",
 
-{
-  name:
-    "adidas X Crazyfast Elite FG",
+        image:
+        "https://assets.adidas.com/images/w_600,f_auto,q_auto/football_boot_placeholder.jpg",
 
-  brand:
-    "adidas X",
+        productPage:
+        "https://www.adidas.co.uk/",
 
-  image:
-    "",
+        speed: "10/10",
+        control: "8/10",
+        comfort: "8/10",
+        traction: "9/10",
 
-  productPage:
-    "https://www.adidas.co.uk/football-boots",
+        surface: "Firm Ground",
 
-  speed:
-    "10/10",
-
-  control:
-    "8/10",
-
-  comfort:
-    "8/10",
-
-  touch:
-    "8.5/10",
-
-  weight:
-    "Very Lightweight",
-
-  surface:
-    "Firm Ground",
-
-  technology:
-    "Aeropacity Speedskin"
-},
+        technology:
+        "Fibertouch + Sprintframe"
+    },
 
 
-/* -----------------------------------------------------
-   PUMA FUTURE
------------------------------------------------------ */
+    {
+        name: "adidas Predator Elite FG",
+        brand: "adidas Predator",
 
-{
-  name:
-    "PUMA Future 8 Ultimate FG",
+        image:
+        "https://assets.adidas.com/images/w_600,f_auto,q_auto/football_boot_placeholder.jpg",
 
-  brand:
-    "PUMA Future",
+        productPage:
+        "https://www.adidas.co.uk/",
 
-  image:
-    "",
+        speed: "8/10",
+        control: "10/10",
+        comfort: "9/10",
+        traction: "9/10",
 
-  productPage:
-    "https://uk.puma.com/uk/en/sports/football",
+        surface: "Firm Ground",
 
-  speed:
-    "8.5/10",
+        technology:
+        "HybridTouch + Strikeskin"
+    },
 
-  control:
-    "9.5/10",
 
-  comfort:
-    "9.5/10",
+    {
+        name: "PUMA FUTURE Ultimate FG",
+        brand: "PUMA Future",
 
-  touch:
-    "9/10",
+        image:
+        "https://images.puma.com/image/upload/f_auto,q_auto/football_boot_placeholder.jpg",
 
-  weight:
-    "Lightweight",
+        productPage:
+        "https://uk.puma.com/",
 
-  surface:
-    "Firm Ground",
+        speed: "8.5/10",
+        control: "9/10",
+        comfort: "10/10",
+        traction: "9/10",
 
-  technology:
-    "FUZIONFIT + 3D grip zones"
-}
+        surface: "Firm Ground",
 
+        technology:
+        "FUZIONFIT + 3D grip zones"
+    }
 
 ];
 
@@ -1408,145 +920,103 @@ const boots = [
    SELECTED BOOTS
 ===================================================== */
 
-const selectedBoots =
-  [null, null, null, null];
+const selectedBoots = [
+    null,
+    null,
+    null,
+    null
+];
 
 
 /* =====================================================
    SHOW SEARCH SUGGESTIONS
 ===================================================== */
 
-function showSuggestions(
-  searchInput,
-  suggestionsBox,
-  selectionNumber
-) {
+function showSuggestions(input, box, number) {
 
-  const search =
-    searchInput.value
-      .toLowerCase()
-      .trim();
+    const search =
+        input.value.toLowerCase().trim();
 
-  suggestionsBox.innerHTML = "";
+    box.innerHTML = "";
 
+    if (!search) {
+        box.classList.remove("show");
+        return;
+    }
 
-  if (!search) {
-
-    suggestionsBox
-      .classList
-      .remove("show");
-
-    return;
-  }
-
-
-  const matches =
-    boots.filter(boot =>
-
-      boot.name
-        .toLowerCase()
-        .includes(search)
-
-      ||
-
-      boot.brand
-        .toLowerCase()
-        .includes(search)
-
-    );
-
-
-  if (matches.length === 0) {
-
-    suggestionsBox.innerHTML =
-
-      `<div
-        style="
-          padding:18px;
-          text-align:center;
-          color:var(--muted);
-          font-size:14px;
-        "
-      >
-        No boots found
-      </div>`;
-
-    suggestionsBox
-      .classList
-      .add("show");
-
-    return;
-  }
-
-
-  matches.forEach(boot => {
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "suggestion";
-
-
-    const imageHTML =
-      boot.image
-
-        ?
-
-      `<img
-        src="${boot.image}"
-        alt="${boot.name}"
-      >`
-
-        :
-
-      `<div
-        class="suggestion-placeholder"
-      >
-        Image
-      </div>`;
-
-
-    item.innerHTML = `
-
-      ${imageHTML}
-
-      <div class="suggestion-info">
-
-        <div class="suggestion-name">
-          ${boot.name}
-        </div>
-
-        <div class="suggestion-brand">
-          ${boot.brand}
-        </div>
-
-      </div>
-
-    `;
-
-
-    item.addEventListener(
-      "click",
-      () => {
-
-        selectBoot(
-          boot,
-          selectionNumber
+    const matches =
+        boots.filter(boot =>
+            boot.name.toLowerCase().includes(search) ||
+            boot.brand.toLowerCase().includes(search)
         );
 
-      }
-    );
+    if (matches.length === 0) {
+
+        box.innerHTML = `
+            <div style="
+                padding:18px;
+                text-align:center;
+                color:var(--muted);
+                font-size:14px;
+            ">
+                No boots found
+            </div>
+        `;
+
+        box.classList.add("show");
+
+        return;
+    }
 
 
-    suggestionsBox.appendChild(item);
+    matches.forEach(boot => {
 
-  });
+        const item =
+            document.createElement("div");
+
+        item.className = "suggestion";
 
 
-  suggestionsBox
-    .classList
-    .add("show");
+        const image =
+            boot.image
+            ? `<img src="${boot.image}" alt="">`
+            : `<div class="suggestion-placeholder">
+                    IMAGE
+               </div>`;
+
+
+        item.innerHTML = `
+
+            ${image}
+
+            <div class="suggestion-info">
+
+                <div class="suggestion-name">
+                    ${boot.name}
+                </div>
+
+                <div class="suggestion-brand">
+                    ${boot.brand}
+                </div>
+
+            </div>
+
+        `;
+
+
+        item.addEventListener("click", () => {
+
+            selectBoot(boot, number);
+
+        });
+
+
+        box.appendChild(item);
+
+    });
+
+
+    box.classList.add("show");
 }
 
 
@@ -1554,126 +1024,92 @@ function showSuggestions(
    SELECT BOOT
 ===================================================== */
 
-function selectBoot(
-  boot,
-  selectionNumber
-) {
+function selectBoot(boot, number) {
 
-  const index =
-    selectionNumber - 1;
+    const index = number - 1;
 
+    selectedBoots[index] = boot;
 
-  selectedBoots[index] =
-    boot;
+    document.getElementById(
+        "search" + number
+    ).value = "";
 
+    document.getElementById(
+        "suggestions" + number
+    ).classList.remove("show");
 
-  document.getElementById(
-    "search" + selectionNumber
-  ).value = "";
-
-
-  document.getElementById(
-    "suggestions" + selectionNumber
-  )
-  .classList
-  .remove("show");
-
-
-  showSelectedBoot(
-    boot,
-    selectionNumber
-  );
+    showSelectedBoot(boot, number);
 }
 
 
 /* =====================================================
-   SHOW SELECTED BOOT
+   DISPLAY SELECTED BOOT
 ===================================================== */
 
-function showSelectedBoot(
-  boot,
-  selectionNumber
-) {
+function showSelectedBoot(boot, number) {
 
-  const element =
-    document.getElementById(
-      "selected" + selectionNumber
-    );
-
-
-  const imageHTML =
-    boot.image
-
-      ?
-
-    `<img
-      src="${boot.image}"
-      alt="${boot.name}"
-    >`
-
-      :
-
-    `<div
-      class="selected-placeholder"
-    >
-      Image<br>
-      coming soon
-    </div>`;
-
-
-  element.innerHTML = `
-
-    ${imageHTML}
-
-    <div class="selected-info">
-
-      <div class="selected-name">
-        ${boot.name}
-      </div>
-
-      <div class="selected-brand">
-        ${boot.brand}
-      </div>
-
-      <a
-        class="boot-page-link"
-        href="${boot.productPage}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View boot page →
-      </a>
-
-    </div>
-
-    <button
-      class="remove-boot"
-      type="button"
-      aria-label="Remove boot"
-    >
-      ×
-    </button>
-
-  `;
-
-
-  element
-    .querySelector(".remove-boot")
-    .addEventListener(
-      "click",
-      () => {
-
-        removeBoot(
-          selectionNumber
+    const element =
+        document.getElementById(
+            "selected" + number
         );
 
-      }
-    );
+
+    const image =
+        boot.image
+        ? `<img src="${boot.image}" alt="${boot.name}">`
+        : `<div class="selected-placeholder">
+                IMAGE
+           </div>`;
 
 
-  element
-    .classList
-    .add("show");
+    element.innerHTML = `
+
+        ${image}
+
+        <div class="selected-info">
+
+            <div class="selected-name">
+                ${boot.name}
+            </div>
+
+            <div class="selected-brand">
+                ${boot.brand}
+            </div>
+
+            <a
+                class="boot-page-link"
+                href="${boot.productPage}"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                View boot page →
+
+            </a>
+
+        </div>
+
+
+        <button
+            class="remove-boot"
+            type="button">
+
+            ×
+
+        </button>
+
+    `;
+
+
+    element
+        .querySelector(".remove-boot")
+        .addEventListener("click", () => {
+
+            removeBoot(number);
+
+        });
+
+
+    element.classList.add("show");
 }
 
 
@@ -1681,29 +1117,20 @@ function showSelectedBoot(
    REMOVE BOOT
 ===================================================== */
 
-function removeBoot(
-  selectionNumber
-) {
+function removeBoot(number) {
 
-  const index =
-    selectionNumber - 1;
+    const index = number - 1;
 
+    selectedBoots[index] = null;
 
-  selectedBoots[index] =
-    null;
+    const element =
+        document.getElementById(
+            "selected" + number
+        );
 
+    element.innerHTML = "";
 
-  const element =
-    document.getElementById(
-      "selected" + selectionNumber
-    );
-
-
-  element.innerHTML = "";
-
-  element
-    .classList
-    .remove("show");
+    element.classList.remove("show");
 }
 
 
@@ -1711,199 +1138,135 @@ function removeBoot(
    SEARCH EVENTS
 ===================================================== */
 
-for (
-  let i = 1;
-  i <= 4;
-  i++
-) {
+for (let i = 1; i <= 4; i++) {
 
-  const input =
-    document.getElementById(
-      "search" + i
+    const input =
+        document.getElementById(
+            "search" + i
+        );
+
+    const suggestions =
+        document.getElementById(
+            "suggestions" + i
+        );
+
+
+    input.addEventListener(
+        "input",
+        function() {
+
+            showSuggestions(
+                this,
+                suggestions,
+                i
+            );
+
+        }
     );
-
-
-  const suggestions =
-    document.getElementById(
-      "suggestions" + i
-    );
-
-
-  input.addEventListener(
-    "input",
-    function() {
-
-      showSuggestions(
-        this,
-        suggestions,
-        i
-      );
-
-    }
-  );
-
-
-  input.addEventListener(
-    "focus",
-    function() {
-
-      showSuggestions(
-        this,
-        suggestions,
-        i
-      );
-
-    }
-  );
 
 }
 
 
 /* =====================================================
-   CLOSE DROPDOWNS
+   CLOSE SUGGESTIONS
 ===================================================== */
 
 document.addEventListener(
-  "click",
-  function(event) {
+    "click",
+    function(event) {
 
-    if (
-      !event.target
-        .closest(".boot-selector")
-    ) {
+        if (
+            !event.target.closest(
+                ".boot-selector"
+            )
+        ) {
 
-      for (
-        let i = 1;
-        i <= 4;
-        i++
-      ) {
+            for (let i = 1; i <= 4; i++) {
 
-        document
-          .getElementById(
-            "suggestions" + i
-          )
-          .classList
-          .remove("show");
+                document
+                    .getElementById(
+                        "suggestions" + i
+                    )
+                    .classList.remove("show");
 
-      }
+            }
+
+        }
 
     }
-
-  }
 );
 
 
 /* =====================================================
-   COMPARE BUTTON
+   COMPARE BUTTON MOUSE GLOW
 ===================================================== */
 
 const compareButton =
-  document.getElementById(
-    "compareButton"
-  );
+    document.getElementById(
+        "compareButton"
+    );
 
-
-/* =====================================================
-   MOUSE FOLLOWING GLOW
-===================================================== */
 
 compareButton.addEventListener(
-  "mousemove",
-  function(event) {
+    "mousemove",
+    function(event) {
 
-    const rect =
-      compareButton
-        .getBoundingClientRect();
-
-
-    compareButton.style.setProperty(
-      "--mouse-x",
-      (
-        event.clientX -
-        rect.left
-      ) + "px"
-    );
+        const rect =
+            compareButton.getBoundingClientRect();
 
 
-    compareButton.style.setProperty(
-      "--mouse-y",
-      (
-        event.clientY -
-        rect.top
-      ) + "px"
-    );
+        compareButton.style.setProperty(
+            "--mouse-x",
+            (event.clientX - rect.left) + "px"
+        );
 
-  }
+
+        compareButton.style.setProperty(
+            "--mouse-y",
+            (event.clientY - rect.top) + "px"
+        );
+
+    }
 );
 
 
 /* =====================================================
-   CLICK RIPPLE
+   RIPPLE EFFECT
 ===================================================== */
 
 compareButton.addEventListener(
-  "click",
-  function(event) {
+    "click",
+    function(event) {
 
-    const rect =
-      compareButton
-        .getBoundingClientRect();
-
-
-    const ripple =
-      document.createElement("span");
+        const rect =
+            compareButton.getBoundingClientRect();
 
 
-    ripple.className =
-      "ripple";
+        const ripple =
+            document.createElement("span");
 
 
-    ripple.style.setProperty(
-      "--ripple-x",
-      (
-        event.clientX -
-        rect.left
-      ) + "px"
-    );
+        ripple.className = "ripple";
 
 
-    ripple.style.setProperty(
-      "--ripple-y",
-      (
-        event.clientY -
-        rect.top
-      ) + "px"
-    );
+        ripple.style.left =
+            (event.clientX - rect.left) + "px";
 
 
-    compareButton.appendChild(
-      ripple
-    );
+        ripple.style.top =
+            (event.clientY - rect.top) + "px";
 
 
-    ripple.addEventListener(
-      "animationend",
-      () => {
-
-        ripple.remove();
-
-      }
-    );
+        compareButton.appendChild(ripple);
 
 
-    compareButton
-      .classList
-      .remove("neon");
+        setTimeout(() => {
 
+            ripple.remove();
 
-    void compareButton.offsetWidth;
+        }, 800);
 
-
-    compareButton
-      .classList
-      .add("neon");
-
-  }
+    }
 );
 
 
@@ -1911,344 +1274,262 @@ compareButton.addEventListener(
    CREATE RESULT CARD
 ===================================================== */
 
-function createResultCard(
-  boot
-) {
+function createResultCard(boot) {
 
-  const imageHTML =
-    boot.image
+    const image =
+        boot.image
+        ? `<img
+                class="result-image"
+                src="${boot.image}"
+                alt="${boot.name}">`
 
-      ?
-
-    `<img
-      class="result-image"
-      src="${boot.image}"
-      alt="${boot.name}"
-    >`
-
-      :
-
-    `<div
-      class="result-image"
-      style="
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:var(--muted);
-      "
-    >
-      Image coming soon
-    </div>`;
+        : `<div class="result-image">
+                Image coming soon
+           </div>`;
 
 
-  return `
+    return `
 
-    <div class="boot-card">
+        <div class="boot-card">
 
-      ${imageHTML}
-
-      <h2>
-        ${boot.name}
-      </h2>
+            ${image}
 
 
-      <div class="stat">
-
-        <span class="stat-name">
-          Speed
-        </span>
-
-        <span class="stat-value">
-          ${boot.speed}
-        </span>
-
-      </div>
+            <h2>
+                ${boot.name}
+            </h2>
 
 
-      <div class="stat">
+            <div class="stat">
 
-        <span class="stat-name">
-          Control
-        </span>
+                <span class="stat-name">
+                    Speed
+                </span>
 
-        <span class="stat-value">
-          ${boot.control}
-        </span>
+                <span class="stat-value">
+                    ${boot.speed}
+                </span>
 
-      </div>
-
-
-      <div class="stat">
-
-        <span class="stat-name">
-          Comfort
-        </span>
-
-        <span class="stat-value">
-          ${boot.comfort}
-        </span>
-
-      </div>
+            </div>
 
 
-      <div class="stat">
+            <div class="stat">
 
-        <span class="stat-name">
-          Touch
-        </span>
+                <span class="stat-name">
+                    Control
+                </span>
 
-        <span class="stat-value">
-          ${boot.touch}
-        </span>
+                <span class="stat-value">
+                    ${boot.control}
+                </span>
 
-      </div>
-
-
-      <div class="stat">
-
-        <span class="stat-name">
-          Weight
-        </span>
-
-        <span class="stat-value">
-          ${boot.weight}
-        </span>
-
-      </div>
+            </div>
 
 
-      <div class="stat">
+            <div class="stat">
 
-        <span class="stat-name">
-          Surface
-        </span>
+                <span class="stat-name">
+                    Comfort
+                </span>
 
-        <span class="stat-value">
-          ${boot.surface}
-        </span>
+                <span class="stat-value">
+                    ${boot.comfort}
+                </span>
 
-      </div>
-
-
-      <div class="stat">
-
-        <span class="stat-name">
-          Technology
-        </span>
-
-        <span class="stat-value">
-          ${boot.technology}
-        </span>
-
-      </div>
+            </div>
 
 
-      <a
-        class="boot-page-link"
-        href="${boot.productPage}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View boot page →
-      </a>
+            <div class="stat">
 
-    </div>
+                <span class="stat-name">
+                    Traction
+                </span>
 
-  `;
+                <span class="stat-value">
+                    ${boot.traction}
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span class="stat-name">
+                    Surface
+                </span>
+
+                <span class="stat-value">
+                    ${boot.surface}
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span class="stat-name">
+                    Technology
+                </span>
+
+                <span class="stat-value">
+                    ${boot.technology}
+                </span>
+
+            </div>
+
+
+            <a
+                class="boot-page-link"
+                href="${boot.productPage}"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                View boot page →
+
+            </a>
+
+        </div>
+
+    `;
 }
 
 
 /* =====================================================
-   COMPARE
+   COMPARE BOOTS
 ===================================================== */
 
 compareButton.addEventListener(
-  "click",
-  function() {
+    "click",
+    function() {
 
-    const chosen =
-      selectedBoots.filter(
-        Boolean
-      );
+        const chosen =
+            selectedBoots.filter(Boolean);
 
 
-    if (
-      chosen.length < 2
-    ) {
+        if (chosen.length < 2) {
 
-      alert(
-        "Please select at least two boots first."
-      );
+            alert(
+                "Please select at least two boots first."
+            );
 
-      return;
+            return;
+
+        }
+
+
+        document.getElementById(
+            "resultsGrid"
+        ).innerHTML =
+
+            chosen
+                .map(boot =>
+                    createResultCard(boot)
+                )
+                .join("");
+
+
+        document.getElementById(
+            "comparisonResult"
+        ).classList.add("show");
+
+
+        document.getElementById(
+            "winner"
+        ).textContent =
+
+            "⚡ Comparing " +
+            chosen
+                .map(boot => boot.name)
+                .join(" vs ");
+
     }
-
-
-    document.getElementById(
-      "resultsGrid"
-    ).innerHTML =
-
-      chosen
-        .map(
-          boot =>
-            createResultCard(
-              boot
-            )
-        )
-        .join("");
-
-
-    document.getElementById(
-      "comparisonResult"
-    )
-    .classList
-    .add("show");
-
-
-    document.getElementById(
-      "winner"
-    ).textContent =
-
-      "⚡ Comparing " +
-      chosen
-        .map(
-          boot =>
-            boot.name
-        )
-        .join(" vs ");
-
-  }
 );
 
 
 /* =====================================================
-   THEME SYSTEM
+   THEME
 ===================================================== */
 
 const themeButton =
-  document.getElementById(
-    "themeButton"
-  );
+    document.getElementById(
+        "themeButton"
+    );
 
 
 let themeMode =
-  localStorage.getItem(
-    "bootComparisonTheme"
-  ) || "auto";
+    localStorage.getItem(
+        "bootComparisonTheme"
+    ) || "auto";
 
 
 function applyTheme() {
 
-  if (
-    themeMode === "auto"
-  ) {
+    if (themeMode === "auto") {
 
-    document.documentElement
-      .removeAttribute(
-        "data-theme"
-      );
+        document.documentElement
+            .removeAttribute("data-theme");
 
-
-    themeButton.textContent =
-      "Theme: Auto";
-
-  }
-
-  else {
-
-    document.documentElement
-      .setAttribute(
-        "data-theme",
-        themeMode
-      );
-
-
-    themeButton.textContent =
-
-      themeMode === "dark"
-
-        ?
-
-      "Theme: Dark"
-
-        :
-
-      "Theme: Light";
-
-  }
-
-}
-
-
-themeButton.addEventListener(
-  "click",
-  function() {
-
-    if (
-      themeMode === "auto"
-    ) {
-
-      themeMode = "light";
-
-    }
-
-    else if (
-      themeMode === "light"
-    ) {
-
-      themeMode = "dark";
+        themeButton.textContent =
+            "Theme: Auto";
 
     }
 
     else {
 
-      themeMode = "auto";
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                themeMode
+            );
+
+        themeButton.textContent =
+            themeMode === "dark"
+            ? "Theme: Dark"
+            : "Theme: Light";
 
     }
 
-
-    localStorage.setItem(
-      "bootComparisonTheme",
-      themeMode
-    );
+}
 
 
-    applyTheme();
+themeButton.addEventListener(
+    "click",
+    function() {
 
-  }
+        if (themeMode === "auto") {
+
+            themeMode = "light";
+
+        }
+
+        else if (themeMode === "light") {
+
+            themeMode = "dark";
+
+        }
+
+        else {
+
+            themeMode = "auto";
+
+        }
+
+
+        localStorage.setItem(
+            "bootComparisonTheme",
+            themeMode
+        );
+
+
+        applyTheme();
+
+    }
 );
 
 
 applyTheme();
 
-
-/* =====================================================
-   FOLLOW SYSTEM THEME
-===================================================== */
-
-const systemTheme =
-  window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  );
-
-
-systemTheme.addEventListener(
-  "change",
-  function() {
-
-    if (
-      themeMode === "auto"
-    ) {
-
-      applyTheme();
-
-    }
-
-  }
-);
-
 </script>
-
 
 </body>
 </html>
